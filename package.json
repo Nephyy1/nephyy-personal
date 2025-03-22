@@ -1,0 +1,14 @@
+{
+  "name": "Nephyy-Personal",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "NephyyDev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
