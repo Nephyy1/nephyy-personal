@@ -363,7 +363,7 @@ export default function Home() {
           <p>&copy; 2025 Nephyy. All rights reserved.</p>
         </footer>
         <a href="https://trakteer.id/nephyy1/tip" target="_blank" className="fixed bottom-4 right-4 z-50">
-          <img src="matcha.png" alt="Tip" className="w-16 h-16 rounded-full shadow-lg transform transition active:scale-90 hover:scale-105" />
+          <img src="matcha.gif" alt="Tip" className="w-16 h-16 rounded-full shadow-lg transform transition active:scale-90 hover:scale-105" />
         </a>
       </div>
     </>
