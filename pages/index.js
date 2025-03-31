@@ -83,10 +83,10 @@ export default function Home() {
           width: 600,
           padding: "3em",
           color: "#716add",
-          background: "#fff url(/images/trees.png)",
+          background: "#fff url(/trees.png)",
           backdrop: `
     rgba(0,0,123,0.4)
-    url("/images/nyan-cat.gif")
+    url("/nyan-cat.gif")
     left top
     no-repeat
   `,
