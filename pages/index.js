@@ -263,7 +263,7 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-6">Sertifikat</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white p-6 rounded-lg shadow-md portfolio-card transition transform duration-300 hover:scale-105 hover:shadow-xl" data-aos="zoom-in">
-                <img src="certificate1.jpg" alt="Sertifikat 1" className="w-full rounded-md mb-4" width="300" height="200" />
+                <img src="certificate1.png" alt="Sertifikat 1" className="w-full rounded-md mb-4" width="300" height="200" />
                 <h3 className="text-2xl font-medium mb-2">Sertifikat 1</h3>
                 <p>Sertifikat 1</p>
                 <div className="mt-2">
@@ -271,7 +271,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md portfolio-card transition transform duration-300 hover:scale-105 hover:shadow-xl" data-aos="zoom-in">
-                <img src="certificate2.jpg" alt="Sertifikat 2" className="w-full rounded-md mb-4" width="300" height="200" />
+                <img src="certificate2.png" alt="Sertifikat 2" className="w-full rounded-md mb-4" width="300" height="200" />
                 <h3 className="text-2xl font-medium mb-2">Sertifikat 2</h3>
                 <p>Sertifikat 2</p>
                 <div className="mt-2">
@@ -279,7 +279,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md portfolio-card transition transform duration-300 hover:scale-105 hover:shadow-xl" data-aos="zoom-in">
-                <img src="certificate3.jpg" alt="Sertifikat 3" className="w-full rounded-md mb-4" width="300" height="200" />
+                <img src="certificate3.png" alt="Sertifikat 3" className="w-full rounded-md mb-4" width="300" height="200" />
                 <h3 className="text-2xl font-medium mb-2">Sertifikat 3</h3>
                 <p>Sertifikat 3</p>
                 <div className="mt-2">
