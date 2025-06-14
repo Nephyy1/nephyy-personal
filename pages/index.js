@@ -252,7 +252,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="md:w-1/2 md:flex md:order-1">
-                        <div className="absolute left-4 top-1 md:relative md:left-auto w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white -translate-x-1/2 md:translate-x-0">
+                        <div className={`absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white md:relative md:left-auto md:top-auto md:translate-y-0 ${index % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'}`}>
                           <i className={`${item.icon} text-lg`}></i>
                         </div>
                       </div>
@@ -367,38 +367,40 @@ export default function Home() {
           </div>
         </section>
         
-        <footer className="bg-white text-gray-800 pt-16 pb-8 px-4">
+        <footer className="bg-slate-900 text-gray-300 pt-16 pb-8 px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-              <div className="md:col-span-1 mb-6 md:mb-0">
-                <h3 className="text-xl font-bold mb-2">Nephyy</h3>
-                <p className="text-gray-500 text-sm">Personal web portofolio untuk menampilkan karya dan perjalanan saya di dunia teknologi.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center sm:text-left">
+              <div className="mb-6 lg:mb-0">
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Nephyy <i className="uil uil-check-circle text-blue-400"></i>
+                </h3>
+                <p className="text-sm">Personal web portofolio untuk menampilkan karya dan perjalanan saya di dunia teknologi.</p>
               </div>
               <div>
-                <h3 className="text-lg font-bold mb-4">Navigasi</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="#home" className="text-gray-500 hover:text-blue-500 transition-colors">Home</a></li>
-                  <li><a href="#about" className="text-gray-500 hover:text-blue-500 transition-colors">About</a></li>
-                  <li><a href="#portfolio" className="text-gray-500 hover:text-blue-500 transition-colors">Portfolio</a></li>
-                  <li><a href="#certificate" className="text-gray-500 hover:text-blue-500 transition-colors">Certificate</a></li>
-                  <li><a href="#skills" className="text-gray-500 hover:text-blue-500 transition-colors">Skill</a></li>
-                  <li><a href="#contact" className="text-gray-500 hover:text-blue-500 transition-colors">Contact</a></li>
+                <h3 className="text-lg font-bold text-white mb-4">Navigasi</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><a href="#home" className="hover:text-blue-400 transition-colors">Home</a></li>
+                  <li><a href="#about" className="hover:text-blue-400 transition-colors">About</a></li>
+                  <li><a href="#portfolio" className="hover:text-blue-400 transition-colors">Portfolio</a></li>
+                  <li><a href="#certificate" className="hover:text-blue-400 transition-colors">Certificate</a></li>
+                  <li><a href="#skills" className="hover:text-blue-400 transition-colors">Skill</a></li>
+                  <li><a href="#contact" className="hover:text-blue-400 transition-colors">Contact</a></li>
                 </ul>
               </div>
-              <div>
-                <h3 className="text-lg font-bold mb-4">Temukan Saya</h3>
-                <div className="flex space-x-4 justify-center md:justify-start">
-                    <a href="https://instagram.com/shunsinee.x" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-pink-500 transition-colors"><i className="uil uil-instagram"></i></a>
-                    <a href="https://t.me/Nephyyy1" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-blue-500 transition-colors"><i className="uil uil-telegram"></i></a>
+               <div>
+                <h3 className="text-lg font-bold text-white mb-4">Temukan Saya</h3>
+                <div className="flex space-x-4 justify-center sm:justify-start">
+                  <a href="https://instagram.com/shunsinee.x" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-pink-500 transition-colors"><i className="uil uil-instagram"></i></a>
+                  <a href="https://t.me/Nephyyy1" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-blue-400 transition-colors"><i className="uil uil-telegram"></i></a>
+                  <a href="https://github.com/Nephyy" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-white transition-colors"><i className="uil uil-github"></i></a>
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-bold mb-4">Kontak</h3>
-                <p className="text-gray-500 text-sm">Tertarik untuk bekerja sama? Silakan hubungi saya melalui form kontak di atas atau sosial media.</p>
+                <h3 className="text-lg font-bold text-white mb-4">Kontak</h3>
+                <p className="text-sm">Tertarik bekerja sama? Silakan hubungi saya melalui form kontak di atas atau sosial media.</p>
               </div>
             </div>
-            <hr className="my-8 border-gray-200" />
-            <div className="text-center text-gray-500 text-sm">
+            <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-500">
               <p>&copy; {new Date().getFullYear()} Nephyy. All rights reserved.</p>
             </div>
           </div>
