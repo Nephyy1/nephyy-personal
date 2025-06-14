@@ -239,7 +239,7 @@ export default function Home() {
               <div className="relative">
                 <div className="absolute top-0 h-full w-0.5 bg-gray-200 left-4 md:left-1/2 md:-translate-x-1/2"></div>
                 {timelineData.map((item, index) => (
-                  <div key={index} className="mb-8 md:flex md:justify-center md:items-start">
+                  <div key={index} className="mb-8 md:flex md:justify-center md:items-center">
                     <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8 md:order-2'}`}>
                        <div 
                         className="ml-12 md:ml-0 p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-lg"
@@ -250,7 +250,7 @@ export default function Home() {
                         <p className={`text-sm leading-snug tracking-wide text-gray-600 ${index % 2 !== 0 && 'md:text-right'}`}>{item.description}</p>
                       </div>
                     </div>
-                    <div className={`w-full md:w-1/2 flex items-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}`}>
+                    <div className="w-full md:w-auto md:order-1">
                       <div className="absolute left-4 md:relative md:left-auto w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white -translate-x-1/2 md:translate-x-0">
                         <i className={`${item.icon} text-lg`}></i>
                       </div>
