@@ -178,21 +178,6 @@ export default function Home() {
           @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
           .animate-slide { animation: fadeIn 0.5s ease-out, slide 3s linear infinite; }
           .modal-content { animation: fadeIn 0.3s ease-out; }
-          .timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 18px;
-            height: 100%;
-            width: 4px;
-            background: #cbd5e1;
-          }
-          @media (min-width: 640px) {
-            .timeline-container::before {
-              left: 50%;
-              margin-left: -2px;
-            }
-          }
         `}</style>
       </Head>
       <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
@@ -249,19 +234,20 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
             <p className="text-lg leading-relaxed mb-16">Saya adalah seorang pemula di bidang teknologi, saya belajar pemrograman otodidak lewat youtube karena bosan waktu covid 19 tidak ada kegiatan :(</p>
 
-            <div className="text-left">
+            <div className="container mx-auto px-4 py-8">
               <h3 className="text-3xl font-bold text-center mb-12">Timeline Perjalanan Saya</h3>
-              <div className="relative timeline-container mx-auto">
+              <div className="relative wrap overflow-hidden h-full">
+                <div className="absolute h-full border border-gray-300 border-2-2" style={{left: '50%'}}></div>
                 {timelineData.map((item, index) => (
-                  <div key={index} className="mb-8 flex justify-between items-center w-full"
-                       data-aos={index % 2 === 0 ? "fade-right" : "fade-left"} data-aos-offset="100">
-                    <div className="order-1 sm:w-5/12"></div>
+                  <div key={index} className={`mb-8 flex justify-between items-center w-full ${index % 2 === 0 ? 'flex-row-reverse left-timeline' : 'right-timeline'}`}>
+                    <div className="order-1 w-5/12"></div>
                     <div className="z-20 flex items-center order-1 bg-blue-500 shadow-xl w-8 h-8 rounded-full">
-                      <h1 className="mx-auto font-semibold text-lg text-white"><i className={item.icon}></i></h1>
+                      <i className={`${item.icon} text-white text-lg mx-auto`}></i>
                     </div>
-                    <div className="order-1 bg-gray-100 rounded-lg shadow-xl sm:w-5/12 px-6 py-4 transition-transform duration-300 hover:scale-105">
-                      <h4 className="font-bold text-lg">{item.title} - {item.year}</h4>
-                      <p className="text-sm leading-snug tracking-wide text-gray-700">{item.description}</p>
+                    <div className="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4 transition-shadow duration-300 hover:shadow-2xl" data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}>
+                      <p className="text-sm font-semibold text-blue-600">{item.year}</p>
+                      <h4 className="font-bold text-gray-800 text-lg mb-1">{item.title}</h4>
+                      <p className="text-sm leading-snug tracking-wide text-gray-600">{item.description}</p>
                     </div>
                   </div>
                 ))}
@@ -435,6 +421,29 @@ export default function Home() {
           </div>
         </div>
       )}
+      <style jsx>{`
+        @media (max-width: 639px) {
+          .wrap > div:not(:first-child) {
+            flex-direction: row !important;
+          }
+          .wrap > div:not(:first-child) .w-5\/12:first-child {
+            display: none;
+          }
+           .wrap > div:not(:first-child) .w-5\/12 {
+            width: 100%;
+          }
+           .wrap .order-1 {
+             order: 2;
+           }
+           .wrap .z-20 {
+             order: 1;
+             margin-right: 1rem;
+           }
+          .wrap .absolute {
+            left: 0 !important;
+          }
+        }
+      `}</style>
     </>
   )
 }
