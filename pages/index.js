@@ -46,21 +46,28 @@ export default function Home() {
     },
     {
       id: 5,
-      title: "Sertifikat Jaringan Komputer",
-      shortDescription: "Dasar-dasar Jaringan.",
+      title: "Sertifikat Artificial Intelligence",
+      shortDescription: "Dasar-dasar Kecerdasan Buatan.",
       image: "certificate2.png",
       tags: ["Official"],
-      longDescription: "Sertifikat kelulusan kursus dasar-dasar jaringan komputer, mempelajari konsep TCP/IP, subnetting, dan konfigurasi perangkat jaringan.",
+      longDescription: "Sertifikat kelulusan kursus dasar-dasar Artifical Intelligence, mempelajari konsep machine learning, neural networks, dan implementasinya.",
     },
     {
       id: 6,
-      title: "Sertifikat UI/UX Design",
-      shortDescription: "Prinsip Desain Antarmuka.",
+      title: "Sertifikat SQL Database",
+      shortDescription: "Manajemen Database SQL.",
       image: "certificate3.png",
       tags: ["Official"],
-      longDescription: "Sertifikat yang menandakan penguasaan prinsip-prinsip dasar desain antarmuka dan pengalaman pengguna, termasuk wireframing, prototyping, dan usability testing.",
+      longDescription: "Sertifikat yang menandakan penguasaan dalam manajemen database, termasuk query SQL, perancangan skema, dan optimisasi performa.",
     },
   ]
+
+  const tagColorMap = {
+    Web: "bg-blue-200 text-blue-800",
+    Design: "bg-green-200 text-green-800",
+    Bot: "bg-red-200 text-red-800",
+    API: "bg-indigo-200 text-indigo-800",
+  }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
@@ -229,7 +236,7 @@ export default function Home() {
                   <p>{item.shortDescription}</p>
                   <div className="mt-4">
                     {item.tags.map(tag => (
-                       <span key={tag} className="inline-block bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded-full mr-2">{tag}</span>
+                       <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -338,7 +345,7 @@ export default function Home() {
             <p className="text-gray-700 mb-4">{selectedItem.longDescription}</p>
             
             {(selectedItem.liveLink || selectedItem.repoLink) && (
-              <div className="flex space-x-4 mt-4">
+              <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mt-4">
                 {selectedItem.liveLink && (
                   <a href={selectedItem.liveLink} target="_blank" rel="noopener noreferrer" className="flex-1">
                     <button className={`${modalButtonClasses} bg-gradient-to-r from-blue-500 to-purple-600`}>
