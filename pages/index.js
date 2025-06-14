@@ -413,11 +413,11 @@ export default function Home() {
       )}
       <style jsx>{`
         @media (max-width: 639px) {
-          .wrap .left-timeline, .wrap .right-timeline {
-            flex-direction: row;
-          }
-          .wrap .left-timeline .w-5\/12, .wrap .right-timeline .w-5\/12:first-child {
+          .wrap .w-5\/12:first-child {
             display: none;
+          }
+          .wrap .left-timeline, .wrap .right-timeline {
+            justify-content: flex-start;
           }
            .wrap .left-timeline > div:last-child, .wrap .right-timeline > div:last-child {
             width: 100%;
