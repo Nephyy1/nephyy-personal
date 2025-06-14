@@ -96,6 +96,8 @@ export default function Home() {
     setIsMenuOpen(false)
   }
 
+  const buttonClasses = "px-5 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center"
+
   return (
     <>
       <Head>
@@ -129,8 +131,6 @@ export default function Home() {
           .animate-out { animation: fadeOut 0.3s ease-out forwards; }
           .progress-fill { width: 0; animation: fillBar 2s forwards; }
           @keyframes fillBar { from { width: 0; } to { width: var(--target-width); } }
-          .btn-interactive { transition: transform 0.3s, box-shadow 0.3s; }
-          .btn-interactive:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
           .input-interactive { transition: border-color 0.3s; }
           .input-interactive:focus { border-color: #34D399; }
           @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
@@ -151,7 +151,6 @@ export default function Home() {
                 <a href="#certificate" className="hover:text-blue-500 transition-colors duration-300">Certificate</a>
                 <a href="#skills" className="hover:text-blue-500 transition-colors duration-300">Skill</a>
                 <a href="#contact" className="hover:text-blue-500 transition-colors duration-300">Contact</a>
-                <a href="https://link.nephyy.tech/thr" className="hover:text-blue-500 transition-colors duration-300">Klaim THR</a>
               </div>
               <div className="md:hidden">
                 <button id="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl focus:outline-none">
@@ -168,7 +167,6 @@ export default function Home() {
                   <a href="#certificate" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-award mr-2"></i>Certificate</a>
                   <a href="#skills" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-brackets-curly mr-2"></i>Skill</a>
                   <a href="#contact" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-envelope mr-2"></i>Contact</a>
-                  <a href="https://link.nephyy.tech/thr" className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-gift mr-2"></i>Klaim THR</a>
                 </div>
               </div>
             )}
@@ -176,11 +174,11 @@ export default function Home() {
         </nav>
         
         <section id="home" className="min-h-screen flex items-center justify-center pt-20" data-aos="fade-up">
-          <div className="text-center transform transition duration-500 hover:scale-105 px-4">
+          <div className="text-center px-4">
             <h1 className="text-5xl font-extrabold mb-4">Selamat Datang</h1>
             <p className="text-xl mb-8">Di Nephyy Personal Web!</p>
-            <a href="https://store.nephyy.biz.id">
-              <button className="btn-interactive px-6 py-3 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-2xl duration-300">
+            <a href="https://store.nephyy.biz.id" className="inline-block">
+              <button className={buttonClasses}>
                 <i className="uil uil-rocket mr-2"></i>Kunjungi Toko Saya
               </button>
             </a>
@@ -202,14 +200,14 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-user"></i> Oshi/Idol</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><img src="marsha.jpg" alt="Marsha JKT48" className="h-6 w-6 rounded-full" /><span>Marsha JKT48</span></div>
-                  <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="btn-interactive px-4 py-1 bg-gradient-to-r from-green-400 to-blue-400 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">Show Profile</button>
+                  <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className={`${buttonClasses} px-4 py-1.5 text-sm`}>Show Profile</button>
                 </div>
               </div>
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-music"></i> Fav Music</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><i className="uil uil-music-alt"></i><span>All Girls Are The Same</span></div>
-                  <button onClick={handleMusicToggle} className="btn-interactive px-4 py-1 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">
+                  <button onClick={handleMusicToggle} className={`${buttonClasses} px-4 py-1.5 text-sm`}>
                     {isMusicPlaying ? <><i className="uil uil-pause mr-2"></i> Stop Music</> : <><i className="uil uil-play mr-2"></i> Play Music</>}
                   </button>
                 </div>
@@ -224,7 +222,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {portfolioData.map((item) => (
                 <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up">
-                  <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-md mb-4" />
+                  <img src={item.image} alt={item.title} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
                   <div className="mt-4">
@@ -244,7 +242,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {certificateData.map((item) => (
                 <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in">
-                  <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-md mb-4" />
+                  <img src={item.image} alt={item.title} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
                   <div className="mt-2">
@@ -291,8 +289,10 @@ export default function Home() {
               <div className="w-full mb-4">
                 <textarea value={whatsappMessage} onChange={(e) => setWhatsappMessage(e.target.value)} id="whatsapp-message" placeholder="Tulis pesan anda disini..." className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 border border-transparent focus:outline-none focus:border-transparent focus:ring-0 input-interactive" rows="4"></textarea>
               </div>
-              <a id="wa-link" href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
-                <i className="uil uil-whatsapp mr-2"></i>Kirim Pesan Whatsapp
+              <a href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="inline-block">
+                <button className={buttonClasses}>
+                  <i className="uil uil-whatsapp mr-2"></i>Kirim Pesan Whatsapp
+                </button>
               </a>
             </div>
           </div>
@@ -333,21 +333,21 @@ export default function Home() {
             >
               <i className="uil uil-times"></i>
             </button>
-            <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-64 object-cover rounded-md mb-4" />
+            <img src={selectedItem.image} alt={selectedItem.title} className="w-full rounded-md mb-4" />
             <h3 className="text-3xl font-bold mb-3">{selectedItem.title}</h3>
             <p className="text-gray-700 mb-4">{selectedItem.longDescription}</p>
             
             {(selectedItem.liveLink || selectedItem.repoLink) && (
               <div className="flex space-x-4 mt-4">
                 {selectedItem.liveLink && (
-                  <a href={selectedItem.liveLink} target="_blank" rel="noopener noreferrer" className="flex-1 text-center btn-interactive px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition duration-300">
-                    Live Demo
+                  <a href={selectedItem.liveLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <button className={`${buttonClasses} w-full`}>Live Demo</button>
                   </a>
                 )}
                 {selectedItem.repoLink && (
-                   <a href={selectedItem.repoLink} target="_blank" rel="noopener noreferrer" className="flex-1 text-center btn-interactive px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-full transition duration-300">
-                    Kode GitHub
-                  </a>
+                   <a href={selectedItem.repoLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                     <button className={`${buttonClasses} w-full bg-gradient-to-r from-gray-700 to-gray-900`}>Kode GitHub</button>
+                   </a>
                 )}
               </div>
             )}
