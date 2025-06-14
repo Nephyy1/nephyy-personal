@@ -237,26 +237,23 @@ export default function Home() {
             <div className="container mx-auto px-4 py-8">
               <h3 className="text-3xl font-bold text-center mb-12">Timeline Perjalanan Saya</h3>
               <div className="relative">
-                <div className="absolute top-0 h-full w-0.5 bg-gray-200 left-3 md:left-1/2 md:-translate-x-1/2"></div>
+                <div className="absolute top-0 h-full w-0.5 bg-gray-200 left-4 md:left-1/2 md:-translate-x-1/2"></div>
                 {timelineData.map((item, index) => (
-                  <div key={index} className="mb-10">
-                    <div className="flex items-center md:justify-center md:space-x-8 flex-row md:flex-row-reverse">
-                      <div className={`flex-auto md:w-5/12 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                        <div 
-                          className={`p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-lg ml-10 md:ml-0`}
-                          data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}
-                        >
-                          <p className="text-sm font-semibold text-blue-600">{item.year}</p>
-                          <h4 className="font-bold text-gray-800 text-lg mb-1">{item.title}</h4>
-                          <p className="text-sm leading-snug tracking-wide text-gray-600">{item.description}</p>
-                        </div>
+                  <div key={index} className="mb-8 md:flex md:justify-center md:items-start">
+                    <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8 md:order-2'}`}>
+                       <div 
+                        className="ml-12 md:ml-0 p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-lg"
+                        data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+                      >
+                        <p className={`text-sm font-semibold text-blue-600 ${index % 2 !== 0 && 'md:text-right'}`}>{item.year}</p>
+                        <h4 className={`font-bold text-gray-800 text-lg mb-1 ${index % 2 !== 0 && 'md:text-right'}`}>{item.title}</h4>
+                        <p className={`text-sm leading-snug tracking-wide text-gray-600 ${index % 2 !== 0 && 'md:text-right'}`}>{item.description}</p>
                       </div>
-                      <div className="absolute md:relative z-10 left-3 md:left-auto">
-                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                          <i className={`${item.icon} text-lg`}></i>
-                        </div>
+                    </div>
+                    <div className={`w-full md:w-1/2 flex items-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}`}>
+                      <div className="absolute left-4 md:relative md:left-auto w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white -translate-x-1/2 md:translate-x-0">
+                        <i className={`${item.icon} text-lg`}></i>
                       </div>
-                      <div className="hidden md:block w-5/12"></div>
                     </div>
                   </div>
                 ))}
