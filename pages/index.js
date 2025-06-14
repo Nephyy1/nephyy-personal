@@ -398,24 +398,14 @@ export default function Home() {
             <h3 className="text-3xl font-bold mb-3">{selectedItem.title}</h3>
             <p className="text-gray-700 mb-4">{selectedItem.longDescription}</p>
             
-            {(selectedItem.liveLink || selectedItem.repoLink) && (
-              <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mt-4">
-                {selectedItem.liveLink && (
-                  <a href={selectedItem.liveLink} target="_blank" rel="noopener noreferrer" className="flex-1">
-                    <button className={`${modalButtonClasses} bg-gradient-to-r from-blue-500 to-purple-600`}>
-                      <i className="uil uil-external-link-alt mr-2"></i>
-                      Live Demo
-                    </button>
-                  </a>
-                )}
-                {selectedItem.repoLink && (
-                   <a href={selectedItem.repoLink} target="_blank" rel="noopener noreferrer" className="flex-1">
-                     <button className={`${modalButtonClasses} bg-gradient-to-r from-gray-700 to-gray-900`}>
-                      <i className="uil uil-github mr-2"></i>
-                      Kode GitHub
-                    </button>
-                   </a>
-                )}
+            {selectedItem.repoLink && (
+              <div className="mt-6 flex justify-center">
+                <a href={selectedItem.repoLink} target="_blank" rel="noopener noreferrer">
+                  <button className={`${modalButtonClasses} bg-gradient-to-r from-gray-700 to-gray-900`}>
+                    <i className="uil uil-github mr-2"></i>
+                    Kode GitHub
+                  </button>
+                </a>
               </div>
             )}
           </div>
@@ -423,14 +413,15 @@ export default function Home() {
       )}
       <style jsx>{`
         @media (max-width: 639px) {
-          .wrap > div:not(:first-child) {
-            flex-direction: row !important;
+          .wrap .left-timeline, .wrap .right-timeline {
+            flex-direction: row;
           }
-          .wrap > div:not(:first-child) .w-5\/12:first-child {
+          .wrap .left-timeline .w-5\/12, .wrap .right-timeline .w-5\/12:first-child {
             display: none;
           }
-           .wrap > div:not(:first-child) .w-5\/12 {
+           .wrap .left-timeline > div:last-child, .wrap .right-timeline > div:last-child {
             width: 100%;
+            text-align: left;
           }
            .wrap .order-1 {
              order: 2;
