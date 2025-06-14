@@ -148,25 +148,25 @@ export default function Home() {
   const handleSendMessageClick = async () => {
     const whatsappUrl = `https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`;
 
+    window.open(whatsappUrl, '_blank');
+
     if (!('Notification' in window) || !('serviceWorker' in navigator)) {
-      window.open(whatsappUrl, '_blank');
+      console.log("Browser ini tidak mendukung fitur notifikasi.");
       return;
     }
-  
+
     try {
       const swRegistration = await navigator.serviceWorker.ready;
       if (Notification.permission === 'granted') {
-        showLocalNotification('Sukses!', 'Anda akan segera dialihkan ke WhatsApp.', swRegistration);
+        showLocalNotification('Sukses!', 'Anda telah dialihkan ke WhatsApp.', swRegistration);
       } else if (Notification.permission !== 'denied') {
         const permission = await Notification.requestPermission();
         if (permission === 'granted') {
-          showLocalNotification('Sukses!', 'Anda akan segera dialihkan ke WhatsApp.', swRegistration);
+          showLocalNotification('Izin Diberikan!', 'Anda sekarang bisa menerima notifikasi.', swRegistration);
         }
       }
     } catch (error) {
-      console.error('Gagal menampilkan notifikasi:', error);
-    } finally {
-      window.open(whatsappUrl, '_blank');
+      console.error('Gagal memproses notifikasi:', error);
     }
   };
 
