@@ -236,18 +236,27 @@ export default function Home() {
 
             <div className="container mx-auto px-4 py-8">
               <h3 className="text-3xl font-bold text-center mb-12">Timeline Perjalanan Saya</h3>
-              <div className="relative wrap overflow-hidden h-full">
-                <div className="absolute h-full border border-gray-300 border-2-2" style={{left: '50%'}}></div>
+              <div className="relative">
+                <div className="absolute top-0 h-full w-0.5 bg-gray-200 left-3 md:left-1/2 md:-translate-x-1/2"></div>
                 {timelineData.map((item, index) => (
-                  <div key={index} className={`mb-8 flex justify-between items-center w-full ${index % 2 === 0 ? 'flex-row-reverse left-timeline' : 'right-timeline'}`}>
-                    <div className="order-1 w-5/12"></div>
-                    <div className="z-20 flex items-center order-1 bg-blue-500 shadow-xl w-8 h-8 rounded-full">
-                      <i className={`${item.icon} text-white text-lg mx-auto`}></i>
-                    </div>
-                    <div className="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4 transition-shadow duration-300 hover:shadow-2xl" data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}>
-                      <p className="text-sm font-semibold text-blue-600">{item.year}</p>
-                      <h4 className="font-bold text-gray-800 text-lg mb-1">{item.title}</h4>
-                      <p className="text-sm leading-snug tracking-wide text-gray-600">{item.description}</p>
+                  <div key={index} className="mb-10">
+                    <div className="flex items-center md:justify-center md:space-x-8 flex-row md:flex-row-reverse">
+                      <div className={`flex-auto md:w-5/12 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                        <div 
+                          className={`p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-lg ml-10 md:ml-0`}
+                          data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}
+                        >
+                          <p className="text-sm font-semibold text-blue-600">{item.year}</p>
+                          <h4 className="font-bold text-gray-800 text-lg mb-1">{item.title}</h4>
+                          <p className="text-sm leading-snug tracking-wide text-gray-600">{item.description}</p>
+                        </div>
+                      </div>
+                      <div className="absolute md:relative z-10 left-3 md:left-auto">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                          <i className={`${item.icon} text-lg`}></i>
+                        </div>
+                      </div>
+                      <div className="hidden md:block w-5/12"></div>
                     </div>
                   </div>
                 ))}
@@ -411,30 +420,6 @@ export default function Home() {
           </div>
         </div>
       )}
-      <style jsx>{`
-        @media (max-width: 639px) {
-          .wrap .w-5\/12:first-child {
-            display: none;
-          }
-          .wrap .left-timeline, .wrap .right-timeline {
-            justify-content: flex-start;
-          }
-           .wrap .left-timeline > div:last-child, .wrap .right-timeline > div:last-child {
-            width: 100%;
-            text-align: left;
-          }
-           .wrap .order-1 {
-             order: 2;
-           }
-           .wrap .z-20 {
-             order: 1;
-             margin-right: 1rem;
-           }
-          .wrap .absolute {
-            left: 0 !important;
-          }
-        }
-      `}</style>
     </>
   )
 }
