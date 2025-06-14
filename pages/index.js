@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 import Head from "next/head"
+import Image from "next/image"
 
 export default function Home() {
   const portfolioData = [
@@ -7,7 +8,7 @@ export default function Home() {
       id: 1,
       title: "Personal Web",
       shortDescription: "Personal web untuk pribadi :v",
-      image: "personal.jpg",
+      image: "/personal.jpg",
       tags: ["Web", "Design"],
       longDescription: "Website portofolio pribadi yang sedang Anda lihat sekarang. Dibuat untuk menampilkan profil, proyek, dan keahlian saya dalam pengembangan web. Dibangun dari awal menggunakan Next.js dan Tailwind CSS.",
       liveLink: "#",
@@ -17,7 +18,7 @@ export default function Home() {
       id: 2,
       title: "Website Store",
       shortDescription: "Untuk berjualan online.",
-      image: "nephyystore.jpg",
+      image: "/nephyystore.jpg",
       tags: ["Web", "Design"],
       longDescription: "Sebuah platform e-commerce sederhana yang dirancang untuk memfasilitasi penjualan produk secara online. Dilengkapi dengan katalog produk, sistem keranjang, dan integrasi pembayaran.",
       liveLink: "https://store.nephyy.biz.id",
@@ -27,7 +28,7 @@ export default function Home() {
       id: 3,
       title: "Bot WhatsApp & Telegram",
       shortDescription: "Simple Assistance,menggunakan nodejs.",
-      image: "bot.jpg",
+      image: "/bot.jpg",
       tags: ["Bot", "API"],
       longDescription: "Bot asisten otomatis untuk platform WhatsApp dan Telegram. Dibuat menggunakan Node.js untuk menangani perintah, memberikan respons otomatis, dan terhubung dengan berbagai API eksternal.",
       liveLink: null,
@@ -40,7 +41,7 @@ export default function Home() {
       id: 4,
       title: "Sertifikat Web Developer",
       shortDescription: "Sertifikat Kelulusan Bootcamp.",
-      image: "certificate1.png",
+      image: "/certificate1.png",
       tags: ["Official"],
       longDescription: "Sertifikat ini diberikan setelah berhasil menyelesaikan bootcamp intensif pengembangan web yang mencakup HTML, CSS, JavaScript, dan framework modern.",
     },
@@ -48,7 +49,7 @@ export default function Home() {
       id: 5,
       title: "Sertifikat Artificial Intelligence",
       shortDescription: "Dasar-dasar Kecerdasan Buatan.",
-      image: "certificate2.png",
+      image: "/certificate2.png",
       tags: ["Official"],
       longDescription: "Sertifikat kelulusan kursus dasar-dasar Artifical Intelligence, mempelajari konsep machine learning, neural networks, dan implementasinya.",
     },
@@ -56,7 +57,7 @@ export default function Home() {
       id: 6,
       title: "Sertifikat SQL Database",
       shortDescription: "Manajemen Database SQL.",
-      image: "certificate3.png",
+      image: "/certificate3.png",
       tags: ["Official"],
       longDescription: "Sertifikat yang menandakan penguasaan dalam manajemen database, termasuk query SQL, perancangan skema, dan optimisasi performa.",
     },
@@ -157,7 +158,7 @@ export default function Home() {
         <meta name="keywords" content="personal, portfolio, website, nephyy, nephyylia, nokos, noktel, nephi" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://nephyy.tech/" />
-        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <meta property="og:image" content="https://nephyy.tech/favicon.ico" />
         <meta name="twitter:image" content="https://nephyy.tech/favicon.ico" />
         <style>{`
@@ -181,7 +182,7 @@ export default function Home() {
         `}</style>
       </Head>
       <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
-        <audio id="fav-music" src="music.mp3" loop ref={audioRef}></audio>
+        <audio id="fav-music" src="/music.mp3" loop ref={audioRef}></audio>
         <nav className="fixed w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex justify-between items-center py-4">
@@ -195,7 +196,7 @@ export default function Home() {
                 <a href="#contact" className="hover:text-blue-500 transition-colors duration-300">Contact</a>
               </div>
               <div className="md:hidden">
-                <button id="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl focus:outline-none">
+                <button id="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl focus:outline-none" aria-label="Toggle Menu">
                   {isMenuOpen ? <i className="uil uil-times"></i> : <i className="uil uil-bars"></i>}
                 </button>
               </div>
@@ -228,9 +229,9 @@ export default function Home() {
         </section>
 
         <section id="about" className="py-20 bg-white relative overflow-hidden">
-          <img src="nyan-cat.gif" alt="Nyan Cat Animation" style={{ top: "-12px" }} className="absolute left-0 opacity-50 animate-slide" />
+          <Image src="/nyan-cat.gif" alt="Nyan Cat Animation" width={200} height={100} style={{ top: "-12px" }} className="absolute left-0 opacity-50 animate-slide" />
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <img src="nephyy2.gif" alt="Profile" className="mx-auto rounded-full shadow-lg mb-8 w-32 h-32 transition transform duration-500 ease-in-out hover:scale-110" width="200" height="200" />
+            <Image src="/nephyy2.gif" alt="Profile" className="mx-auto rounded-full shadow-lg mb-8 w-32 h-32 transition transform duration-500 ease-in-out hover:scale-110" width="200" height="200" />
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
             <p className="text-lg leading-relaxed mb-16">Saya adalah seorang pemula di bidang teknologi, saya belajar pemrograman otodidak lewat youtube karena bosan waktu covid 19 tidak ada kegiatan :(</p>
 
@@ -252,7 +253,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="md:w-1/2 md:flex md:order-1">
-                        <div className={`absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white md:relative md:left-auto md:top-auto md:translate-y-0 ${index % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'}`}>
+                        <div className="absolute left-4 top-1 md:relative md:left-auto w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white -translate-x-1/2 md:translate-x-0">
                           <i className={`${item.icon} text-lg`}></i>
                         </div>
                       </div>
@@ -270,7 +271,7 @@ export default function Home() {
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-user"></i> Oshi/Idol</h3>
                 <div className="flex flex-col items-start gap-2">
-                  <div className="flex items-center gap-2"><img src="marsha.jpg" alt="Marsha JKT48" className="h-6 w-6 rounded-full" /><span>Marsha JKT48</span></div>
+                  <div className="flex items-center gap-2"><Image src="/marsha.jpg" alt="Marsha JKT48" width={24} height={24} className="h-6 w-6 rounded-full" /><span>Marsha JKT48</span></div>
                   <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="btn-interactive px-4 py-1 bg-gradient-to-r from-green-400 to-blue-400 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">Show Profile</button>
                 </div>
               </div>
@@ -293,7 +294,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {portfolioData.map((item) => (
                 <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up">
-                  <img src={item.image} alt={item.title} className="w-full rounded-md mb-4" />
+                  <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
                   <div className="mt-4">
@@ -313,7 +314,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {certificateData.map((item) => (
                 <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in">
-                  <img src={item.image} alt={item.title} className="w-full rounded-md mb-4" />
+                  <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
                   <div className="mt-2">
@@ -367,47 +368,45 @@ export default function Home() {
           </div>
         </section>
         
-        <footer className="bg-slate-900 text-gray-300 pt-16 pb-8 px-8">
+        <footer className="bg-white text-gray-800 pt-16 pb-8 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center sm:text-left">
-              <div className="mb-6 lg:mb-0">
-                <h3 className="text-xl font-bold text-white mb-4">
-                  Nephyy <i className="uil uil-check-circle text-blue-400"></i>
-                </h3>
-                <p className="text-sm">Personal web portofolio untuk menampilkan karya dan perjalanan saya di dunia teknologi.</p>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 text-center md:text-left">
+              <div className="md:col-span-12 lg:col-span-4 mb-6 md:mb-0">
+                <h3 className="text-xl font-bold mb-2">Nephyy</h3>
+                <p className="text-gray-500 text-sm">Personal web portofolio untuk menampilkan karya dan perjalanan saya di dunia teknologi.</p>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-4">Navigasi</h3>
-                <ul className="space-y-3 text-sm">
-                  <li><a href="#home" className="hover:text-blue-400 transition-colors">Home</a></li>
-                  <li><a href="#about" className="hover:text-blue-400 transition-colors">About</a></li>
-                  <li><a href="#portfolio" className="hover:text-blue-400 transition-colors">Portfolio</a></li>
-                  <li><a href="#certificate" className="hover:text-blue-400 transition-colors">Certificate</a></li>
-                  <li><a href="#skills" className="hover:text-blue-400 transition-colors">Skill</a></li>
-                  <li><a href="#contact" className="hover:text-blue-400 transition-colors">Contact</a></li>
+              <div className="md:col-span-4 lg:col-span-2">
+                <h3 className="text-lg font-bold mb-4">Navigasi</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="#home" className="text-gray-500 hover:text-blue-500 transition-colors">Home</a></li>
+                  <li><a href="#about" className="text-gray-500 hover:text-blue-500 transition-colors">About</a></li>
+                  <li><a href="#portfolio" className="text-gray-500 hover:text-blue-500 transition-colors">Portfolio</a></li>
+                  <li><a href="#certificate" className="text-gray-500 hover:text-blue-500 transition-colors">Certificate</a></li>
+                  <li><a href="#skills" className="text-gray-500 hover:text-blue-500 transition-colors">Skill</a></li>
+                  <li><a href="#contact" className="text-gray-500 hover:text-blue-500 transition-colors">Contact</a></li>
                 </ul>
               </div>
-               <div>
-                <h3 className="text-lg font-bold text-white mb-4">Temukan Saya</h3>
-                <div className="flex space-x-4 justify-center sm:justify-start">
-                  <a href="https://instagram.com/shunsinee.x" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-pink-500 transition-colors"><i className="uil uil-instagram"></i></a>
-                  <a href="https://t.me/Nephyyy1" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-blue-400 transition-colors"><i className="uil uil-telegram"></i></a>
-                  <a href="https://github.com/Nephyy" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-white transition-colors"><i className="uil uil-github"></i></a>
+              <div className="md:col-span-4 lg:col-span-3">
+                <h3 className="text-lg font-bold mb-4">Temukan Saya</h3>
+                <div className="flex space-x-4 justify-center md:justify-start">
+                    <a href="https://instagram.com/shunsinee.x" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-pink-500 transition-colors"><i className="uil uil-instagram"></i></a>
+                    <a href="https://t.me/Nephyyy1" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-blue-500 transition-colors"><i className="uil uil-telegram"></i></a>
                 </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-4">Kontak</h3>
-                <p className="text-sm">Tertarik bekerja sama? Silakan hubungi saya melalui form kontak di atas atau sosial media.</p>
+              <div className="md:col-span-4 lg:col-span-3">
+                <h3 className="text-lg font-bold mb-4">Kontak</h3>
+                <p className="text-gray-500 text-sm">Tertarik untuk bekerja sama? Silakan hubungi saya melalui form kontak di atas atau sosial media.</p>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-500">
+            <hr className="my-8 border-gray-200" />
+            <div className="text-center text-gray-500 text-sm">
               <p>&copy; {new Date().getFullYear()} Nephyy. All rights reserved.</p>
             </div>
           </div>
         </footer>
         
-        <a href="https://trakteer.id/nephyy1/tip" target="_blank" className="fixed bottom-4 right-4 z-30">
-          <img src="matcha.gif" alt="Tip" className="w-16 h-16 rounded-full shadow-lg transform transition active:scale-90 hover:scale-105" />
+        <a href="https://trakteer.id/nephyy1/tip" target="_blank" rel="noopener noreferrer" className="fixed bottom-4 right-4 z-30">
+          <Image src="/matcha.gif" alt="Tip" width={64} height={64} className="w-16 h-16 rounded-full shadow-lg transform transition active:scale-90 hover:scale-105" />
         </a>
       </div>
 
@@ -423,10 +422,11 @@ export default function Home() {
             <button 
               onClick={() => setSelectedItem(null)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl"
+              aria-label="Close modal"
             >
               <i className="uil uil-times"></i>
             </button>
-            <img src={selectedItem.image} alt={selectedItem.title} className="w-full rounded-md mb-4" />
+            <Image src={selectedItem.image} alt={selectedItem.title} width={600} height={400} className="w-full rounded-md mb-4" />
             <h3 className="text-3xl font-bold mb-3">{selectedItem.title}</h3>
             <p className="text-gray-700 mb-4">{selectedItem.longDescription}</p>
             
