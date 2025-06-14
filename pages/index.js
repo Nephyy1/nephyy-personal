@@ -111,6 +111,16 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').then(function (registration) {
+            console.log('Service Worker registration successful with scope: ', registration.scope);
+          }, function (err) {
+            console.log('Service Worker registration failed: ', err);
+          });
+        });
+      }
+
       if (!window.AOS) {
         const aosScript = document.createElement("script")
         aosScript.src = "https://unpkg.com/aos@next/dist/aos.js"
@@ -136,6 +146,39 @@ export default function Home() {
   const handleMenuLinkClick = () => {
     setIsMenuOpen(false)
   }
+
+  const showLocalNotification = (title, body, swRegistration) => {
+    const options = {
+      body: body,
+      icon: '/icons/icon-192x192.png',
+    };
+    swRegistration.showNotification(title, options);
+  };
+
+  const handleSendMessageClick = async () => {
+    const whatsappUrl = `https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`;
+
+    if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+      window.open(whatsappUrl, '_blank');
+      return;
+    }
+  
+    try {
+      const swRegistration = await navigator.serviceWorker.ready;
+      if (Notification.permission === 'granted') {
+        showLocalNotification('Sukses!', 'Anda akan segera dialihkan ke WhatsApp.', swRegistration);
+      } else if (Notification.permission !== 'denied') {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          showLocalNotification('Sukses!', 'Anda akan segera dialihkan ke WhatsApp.', swRegistration);
+        }
+      }
+    } catch (error) {
+      console.error('Gagal menampilkan notifikasi:', error);
+    } finally {
+      window.open(whatsappUrl, '_blank');
+    }
+  };
 
   const modalButtonClasses = "w-full px-5 py-2.5 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center"
 
@@ -355,9 +398,9 @@ export default function Home() {
               <div className="w-full mb-4">
                 <textarea value={whatsappMessage} onChange={(e) => setWhatsappMessage(e.target.value)} id="whatsapp-message" placeholder="Tulis pesan anda disini..." className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 border border-transparent focus:outline-none focus:border-transparent focus:ring-0 input-interactive" rows="4"></textarea>
               </div>
-              <a href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
+              <button onClick={handleSendMessageClick} className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
                 <i className="uil uil-whatsapp mr-2"></i>Kirim Pesan Whatsapp
-              </a>
+              </button>
             </div>
           </div>
         </section>
