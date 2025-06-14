@@ -111,16 +111,6 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').then(function (registration) {
-            console.log('Service Worker registration successful with scope: ', registration.scope);
-          }, function (err) {
-            console.log('Service Worker registration failed: ', err);
-          });
-        });
-      }
-
       if (!window.AOS) {
         const aosScript = document.createElement("script")
         aosScript.src = "https://unpkg.com/aos@next/dist/aos.js"
@@ -201,7 +191,8 @@ export default function Home() {
         <meta name="keywords" content="personal, portfolio, website, nephyy, nephyylia, nokos, noktel, nephi" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://nephyy.tech/" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/icons/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <meta property="og:image" content="https://nephyy.tech/favicon.ico" />
         <meta name="twitter:image" content="https://nephyy.tech/favicon.ico" />
         <style>{`
