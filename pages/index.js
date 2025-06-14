@@ -62,6 +62,39 @@ export default function Home() {
     },
   ]
 
+  const timelineData = [
+    {
+      year: "2020",
+      title: "Awal Perjalanan",
+      description: "Karena pandemi, saya mulai belajar pemrograman secara otodidak melalui YouTube. Fokus awal pada HTML, CSS, dan dasar-dasar JavaScript.",
+      icon: "uil-rocket"
+    },
+    {
+      year: "2021",
+      title: "Proyek Pertama",
+      description: "Berhasil membangun beberapa website statis sederhana untuk teman dan komunitas sebagai latihan untuk mengasah kemampuan front-end.",
+      icon: "uil-lightbulb-alt"
+    },
+    {
+      year: "2022",
+      title: "Mempelajari Backend",
+      description: "Mulai mendalami sisi server dengan belajar PHP dan Node.js, serta membuat bot WhatsApp & Telegram pertama saya.",
+      icon: "uil-server-network"
+    },
+    {
+      year: "2023",
+      title: "Ekosistem Modern",
+      description: "Beralih ke ekosistem JavaScript modern dengan mempelajari React.js dan Next.js untuk membangun aplikasi web yang lebih interaktif dan cepat.",
+      icon: "uil-react"
+    },
+    {
+      year: "2025",
+      title: "Terus Berkembang",
+      description: "Mulai mengeksplorasi bidang baru seperti AI dan memperdalam keahlian database dengan SQL, sambil terus mengikuti perkembangan teknologi web.",
+      icon: "uil-brain"
+    }
+  ]
+
   const tagColorMap = {
     Web: "bg-blue-200 text-blue-800",
     Design: "bg-green-200 text-green-800",
@@ -145,6 +178,21 @@ export default function Home() {
           @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
           .animate-slide { animation: fadeIn 0.5s ease-out, slide 3s linear infinite; }
           .modal-content { animation: fadeIn 0.3s ease-out; }
+          .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 18px;
+            height: 100%;
+            width: 4px;
+            background: #cbd5e1;
+          }
+          @media (min-width: 640px) {
+            .timeline-container::before {
+              left: 50%;
+              margin-left: -2px;
+            }
+          }
         `}</style>
       </Head>
       <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
@@ -199,8 +247,28 @@ export default function Home() {
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
             <img src="nephyy2.gif" alt="Profile" className="mx-auto rounded-full shadow-lg mb-8 w-32 h-32 transition transform duration-500 ease-in-out hover:scale-110" width="200" height="200" />
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
-            <p className="text-lg leading-relaxed">Saya adalah seorang pemula di bidang teknologi, saya belajar pemrograman otodidak lewat youtube karena bosan waktu covid 19 tidak ada kegiatan :(</p>
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+            <p className="text-lg leading-relaxed mb-16">Saya adalah seorang pemula di bidang teknologi, saya belajar pemrograman otodidak lewat youtube karena bosan waktu covid 19 tidak ada kegiatan :(</p>
+
+            <div className="text-left">
+              <h3 className="text-3xl font-bold text-center mb-12">Timeline Perjalanan Saya</h3>
+              <div className="relative timeline-container mx-auto">
+                {timelineData.map((item, index) => (
+                  <div key={index} className="mb-8 flex justify-between items-center w-full"
+                       data-aos={index % 2 === 0 ? "fade-right" : "fade-left"} data-aos-offset="100">
+                    <div className="order-1 sm:w-5/12"></div>
+                    <div className="z-20 flex items-center order-1 bg-blue-500 shadow-xl w-8 h-8 rounded-full">
+                      <h1 className="mx-auto font-semibold text-lg text-white"><i className={item.icon}></i></h1>
+                    </div>
+                    <div className="order-1 bg-gray-100 rounded-lg shadow-xl sm:w-5/12 px-6 py-4 transition-transform duration-300 hover:scale-105">
+                      <h4 className="font-bold text-lg">{item.title} - {item.year}</h4>
+                      <p className="text-sm leading-snug tracking-wide text-gray-700">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-heart"></i> Hobi</h3>
                 <ul className="space-y-1"><li className="flex items-center gap-2"><i className="uil uil-desktop"></i> Coding</li><li className="flex items-center gap-2"><i className="uil uil-brush-alt"></i> Drawing</li><li className="flex items-center gap-2"><i className="uil uil-book"></i> Read Book</li></ul>
