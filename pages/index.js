@@ -366,20 +366,42 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <section id="thanks" className="py-20">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold mb-6">Thanks To</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-md"><img src="nephyy.gif" alt="Profile 1" className="mx-auto rounded-full mb-4 w-24 h-24" /><h3 className="text-2xl font-medium mb-2">Nephyy</h3><p className="text-gray-600">Developer</p></div>
-              <div className="bg-white p-6 rounded-lg shadow-md"><img src="gpt.gif" alt="Profile 2" className="mx-auto rounded-full mb-4 w-24 h-24" /><h3 className="text-2xl font-medium mb-2">Chat GPT</h3><p className="text-gray-600">AI Assistance</p></div>
-              <div className="bg-white p-6 rounded-lg shadow-md"><img src="github.gif" alt="Profile 3" className="mx-auto rounded-full mb-4 w-24 h-24" /><h3 className="text-2xl font-medium mb-2">Github</h3><p className="text-gray-600">Deploy Website</p></div>
+        
+        <footer className="bg-white text-gray-800 pt-16 pb-8 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+              <div className="md:col-span-1 mb-6 md:mb-0">
+                <h3 className="text-xl font-bold mb-2">Nephyy</h3>
+                <p className="text-gray-500 text-sm">Personal web portofolio untuk menampilkan karya dan perjalanan saya di dunia teknologi.</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-4">Navigasi</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="#home" className="text-gray-500 hover:text-blue-500 transition-colors">Home</a></li>
+                  <li><a href="#about" className="text-gray-500 hover:text-blue-500 transition-colors">About</a></li>
+                  <li><a href="#portfolio" className="text-gray-500 hover:text-blue-500 transition-colors">Portfolio</a></li>
+                  <li><a href="#certificate" className="text-gray-500 hover:text-blue-500 transition-colors">Certificate</a></li>
+                  <li><a href="#skills" className="text-gray-500 hover:text-blue-500 transition-colors">Skill</a></li>
+                  <li><a href="#contact" className="text-gray-500 hover:text-blue-500 transition-colors">Contact</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-4">Temukan Saya</h3>
+                <div className="flex space-x-4 justify-center md:justify-start">
+                    <a href="https://instagram.com/shunsinee.x" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-pink-500 transition-colors"><i className="uil uil-instagram"></i></a>
+                    <a href="https://t.me/Nephyyy1" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-blue-500 transition-colors"><i className="uil uil-telegram"></i></a>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-4">Kontak</h3>
+                <p className="text-gray-500 text-sm">Tertarik untuk bekerja sama? Silakan hubungi saya melalui form kontak di atas atau sosial media.</p>
+              </div>
+            </div>
+            <hr className="my-8 border-gray-200" />
+            <div className="text-center text-gray-500 text-sm">
+              <p>&copy; {new Date().getFullYear()} Nephyy. All rights reserved.</p>
             </div>
           </div>
-        </section>
-
-        <footer className="py-6 bg-white bg-opacity-80 text-center">
-          <p>&copy; 2025 Nephyy. All rights reserved.</p>
         </footer>
         
         <a href="https://trakteer.id/nephyy1/tip" target="_blank" className="fixed bottom-4 right-4 z-30">
