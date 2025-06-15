@@ -107,6 +107,8 @@ export default function Home() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
   const [whatsappMessage, setWhatsappMessage] = useState("")
   const [selectedItem, setSelectedItem] = useState(null)
+  const [isQrModalOpen, setIsQrModalOpen] = useState(false)
+  const [profileImage, setProfileImage] = useState('/nephyy2.gif')
   const audioRef = useRef(null)
 
   useEffect(() => {
@@ -137,37 +139,8 @@ export default function Home() {
     setIsMenuOpen(false)
   }
 
-  const showLocalNotification = (title, body, swRegistration) => {
-    const options = {
-      body: body,
-      icon: '/icons/icon-192x192.png',
-    };
-    swRegistration.showNotification(title, options);
-  };
-
-  const handleSendMessageClick = async () => {
-    const whatsappUrl = `https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`;
-
-    window.open(whatsappUrl, '_blank');
-
-    if (!('Notification' in window) || !('serviceWorker' in navigator)) {
-      console.log("Browser ini tidak mendukung fitur notifikasi.");
-      return;
-    }
-
-    try {
-      const swRegistration = await navigator.serviceWorker.ready;
-      if (Notification.permission === 'granted') {
-        showLocalNotification('Sukses!', 'Anda telah dialihkan ke WhatsApp.', swRegistration);
-      } else if (Notification.permission !== 'denied') {
-        const permission = await Notification.requestPermission();
-        if (permission === 'granted') {
-          showLocalNotification('Izin Diberikan!', 'Anda sekarang bisa menerima notifikasi.', swRegistration);
-        }
-      }
-    } catch (error) {
-      console.error('Gagal memproses notifikasi:', error);
-    }
+  const handleProfileImageSwap = () => {
+    setProfileImage(prevImg => prevImg === '/nephyy2.gif' ? '/marsha.jpg' : '/nephyy2.gif');
   };
 
   const modalButtonClasses = "w-full px-5 py-2.5 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center"
@@ -213,6 +186,8 @@ export default function Home() {
           @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
           .animate-slide { animation: fadeIn 0.5s ease-out, slide 3s linear infinite; }
           .modal-content { animation: fadeIn 0.3s ease-out; }
+          .qr-code-image { transition: transform 0.3s ease-in-out; }
+          .qr-code-image:hover { transform: scale(1.05); }
         `}</style>
       </Head>
       <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
@@ -265,7 +240,12 @@ export default function Home() {
         <section id="about" className="py-20 bg-white relative overflow-hidden">
           <Image src="/nyan-cat.gif" alt="Nyan Cat Animation" width={200} height={100} style={{ top: "-12px" }} className="absolute left-0 opacity-50 animate-slide" />
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <Image src="/nephyy2.gif" alt="Profile" className="mx-auto rounded-full shadow-lg mb-8 w-32 h-32 transition transform duration-500 ease-in-out hover:scale-110" width="200" height="200" />
+            <div className="relative inline-block group mb-8">
+              <Image src={profileImage} alt="Profile" className="mx-auto rounded-full shadow-lg w-32 h-32 transition-transform duration-300 ease-in-out" width="200" height="200" />
+              <button onClick={handleProfileImageSwap} aria-label="Ganti gambar profil" className="absolute bottom-2 right-2 bg-white bg-opacity-70 rounded-full p-2 shadow-lg transition-all duration-300 transform opacity-0 group-hover:opacity-100 hover:scale-110 focus:outline-none">
+                <i className="uil uil-camera-change text-xl text-gray-800"></i>
+              </button>
+            </div>
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
             <p className="text-lg leading-relaxed mb-16">Saya adalah seorang pemula di bidang teknologi, saya belajar pemrograman otodidak lewat youtube karena bosan waktu covid 19 tidak ada kegiatan :(</p>
 
@@ -291,7 +271,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-heart"></i> Hobi</h3>
                 <ul className="space-y-1"><li className="flex items-center gap-2"><i className="uil uil-desktop"></i> Coding</li><li className="flex items-center gap-2"><i className="uil uil-brush-alt"></i> Drawing</li><li className="flex items-center gap-2"><i className="uil uil-book"></i> Read Book</li></ul>
@@ -310,6 +290,13 @@ export default function Home() {
                   <button onClick={handleMusicToggle} className="btn-interactive px-4 py-1 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">
                     {isMusicPlaying ? <><i className="uil uil-pause mr-2"></i> Stop Music</> : <><i className="uil uil-play mr-2"></i> Play Music</>}
                   </button>
+                </div>
+              </div>
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-qrcode-scan"></i> Bagikan Profil</h3>
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-gray-600 text-sm">Pindai untuk mengunjungi website ini di perangkat lain.</span>
+                  <button onClick={() => setIsQrModalOpen(true)} className="btn-interactive px-4 py-1 bg-gradient-to-r from-gray-600 to-gray-800 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">Tampilkan QR</button>
                 </div>
               </div>
             </div>
@@ -389,9 +376,9 @@ export default function Home() {
               <div className="w-full mb-4">
                 <textarea value={whatsappMessage} onChange={(e) => setWhatsappMessage(e.target.value)} id="whatsapp-message" placeholder="Tulis pesan anda disini..." className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 border border-transparent focus:outline-none focus:border-transparent focus:ring-0 input-interactive" rows="4"></textarea>
               </div>
-              <button onClick={handleSendMessageClick} className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
+              <a href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
                 <i className="uil uil-whatsapp mr-2"></i>Kirim Pesan Whatsapp
-              </button>
+              </a>
             </div>
           </div>
         </section>
@@ -468,6 +455,30 @@ export default function Home() {
                 </a>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {isQrModalOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" 
+          onClick={() => setIsQrModalOpen(false)}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-2xl max-w-xs w-full p-6 relative modal-content text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setIsQrModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl"
+              aria-label="Close modal"
+            >
+              <i className="uil uil-times"></i>
+            </button>
+            <h3 className="text-2xl font-bold mb-4">Bagikan Profil Saya</h3>
+            <Image src="/qr-code.png" alt="QR Code untuk Website" width={256} height={256} className="mx-auto qr-code-image" />
+            <p className="mt-4 text-gray-600 text-sm">Pindai kode di atas untuk membuka web ini di perangkat lain.</p>
+            <p className="mt-2 font-semibold text-blue-600">nephyy.tech</p>
           </div>
         </div>
       )}
