@@ -140,7 +140,13 @@ export default function Home() {
   }
 
   const handleProfileImageSwap = () => {
-    setProfileImage(prevImg => prevImg === '/nephyy2.gif' ? '/marsha.jpg' : '/nephyy2.gif');
+    setProfileImage(prevImg => prevImg === '/nephyy2.gif' ? '/qr-code.png' : '/nephyy2.gif');
+  };
+
+  const handleProfileImageClick = () => {
+    if (profileImage === '/qr-code.png') {
+      setIsQrModalOpen(true);
+    }
   };
 
   const modalButtonClasses = "w-full px-5 py-2.5 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center"
@@ -240,10 +246,26 @@ export default function Home() {
         <section id="about" className="py-20 bg-white relative overflow-hidden">
           <Image src="/nyan-cat.gif" alt="Nyan Cat Animation" width={200} height={100} style={{ top: "-12px" }} className="absolute left-0 opacity-50 animate-slide" />
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <div className="relative inline-block group mb-8">
-              <Image src={profileImage} alt="Profile" className="mx-auto rounded-full shadow-lg w-32 h-32 transition-transform duration-300 ease-in-out" width="200" height="200" />
-              <button onClick={handleProfileImageSwap} aria-label="Ganti gambar profil" className="absolute bottom-2 right-2 bg-white bg-opacity-70 rounded-full p-2 shadow-lg transition-all duration-300 transform opacity-0 group-hover:opacity-100 hover:scale-110 focus:outline-none">
-                <i className="uil uil-camera-change text-xl text-gray-800"></i>
+            <div 
+              className="relative inline-block mb-8 group" 
+              onClick={handleProfileImageClick}
+            >
+              <Image 
+                src={profileImage} 
+                alt="Profile" 
+                className={`mx-auto rounded-full shadow-lg w-32 h-32 object-cover transition-transform duration-300 ease-in-out ${profileImage === '/qr-code.png' ? 'cursor-pointer hover:scale-105' : 'hover:scale-110'}`} 
+                width="200" 
+                height="200" 
+              />
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleProfileImageSwap();
+                }} 
+                aria-label="Ganti gambar profil" 
+                className="absolute -bottom-2 -right-2 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-transform duration-300 transform hover:scale-110 focus:outline-none"
+              >
+                <i className="uil uil-sync text-xl text-gray-800"></i>
               </button>
             </div>
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
