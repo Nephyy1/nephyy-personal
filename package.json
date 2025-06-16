@@ -10,6 +10,9 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "next-pwa": "latest"
+    "next-pwa": "latest",
+    "next-i18next": "latest",
+    "react-i18next": "latest",
+    "i18next": "latest"
   }
 }
