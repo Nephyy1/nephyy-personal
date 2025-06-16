@@ -17,9 +17,14 @@ export async function getStaticProps({ locale }) {
 export default function Home() {
   const { t } = useTranslation('common');
 
-  const portfolioData = t('portfolio.items', { returnObjects: true });
-  const certificateData = t('certificate.items', { returnObjects: true });
-  const timelineData = t('timeline.items', { returnObjects: true });
+  const portfolioItems = t('portfolio.items', { returnObjects: true });
+  const portfolioData = Array.isArray(portfolioItems) ? portfolioItems : [];
+
+  const certificateItems = t('certificate.items', { returnObjects: true });
+  const certificateData = Array.isArray(certificateItems) ? certificateItems : [];
+
+  const timelineItems = t('timeline.items', { returnObjects: true });
+  const timelineData = Array.isArray(timelineItems) ? timelineItems : [];
 
   const tagColorMap = {
     Web: "bg-blue-200 text-blue-800",
@@ -440,4 +445,4 @@ export default function Home() {
       )}
     </>
   );
-}
+    }
