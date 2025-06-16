@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import Head from "next/head"
 import Image from "next/image"
+import ScrollProgressBar from "../components/ScrollProgressBar"
 
 export default function Home() {
   const portfolioData = [
@@ -196,6 +197,9 @@ export default function Home() {
           .qr-code-image:hover { transform: scale(1.05); }
         `}</style>
       </Head>
+
+      <ScrollProgressBar />
+
       <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
         <audio id="fav-music" src="/music.mp3" loop ref={audioRef}></audio>
         <nav className="fixed w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm">
