@@ -7,8 +7,8 @@ export default function Home() {
   const portfolioData = [
     {
       id: 1,
-      title: "Personal Web",
-      shortDescription: "Personal web untuk pribadi :v",
+      title: "Website Portofolio Pribadi",
+      shortDescription: "Platform digital untuk menampilkan profil, proyek, dan keahlian saya.",
       image: "/personal.jpg",
       tags: ["Web", "Design"],
       longDescription: "Website portofolio pribadi yang sedang Anda lihat sekarang. Dibuat untuk menampilkan profil, proyek, dan keahlian saya dalam pengembangan web. Dibangun dari awal menggunakan Next.js dan Tailwind CSS.",
@@ -17,8 +17,8 @@ export default function Home() {
     },
     {
       id: 2,
-      title: "Website Store",
-      shortDescription: "Untuk berjualan online.",
+      title: "Platform E-Commerce",
+      shortDescription: "Solusi toko online fungsional untuk transaksi jual beli produk.",
       image: "/nephyystore.jpg",
       tags: ["Web", "Design"],
       longDescription: "Sebuah platform e-commerce sederhana yang dirancang untuk memfasilitasi penjualan produk secara online. Dilengkapi dengan katalog produk, sistem keranjang, dan integrasi pembayaran.",
@@ -27,8 +27,8 @@ export default function Home() {
     },
     {
       id: 3,
-      title: "Bot WhatsApp & Telegram",
-      shortDescription: "Simple Assistance,menggunakan nodejs.",
+      title: "Asisten Virtual (Bot) WhatsApp & Telegram",
+      shortDescription: "Bot otomatis berbasis Node.js untuk interaksi dan layanan mandiri.",
       image: "/bot.jpg",
       tags: ["Bot", "API"],
       longDescription: "Bot asisten otomatis untuk platform WhatsApp dan Telegram. Dibuat menggunakan Node.js untuk menangani perintah, memberikan respons otomatis, dan terhubung dengan berbagai API eksternal.",
@@ -305,8 +305,10 @@ export default function Home() {
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-user"></i> Oshi/Idol</h3>
                 <div className="flex flex-col items-start gap-2">
-                  <div className="flex items-center gap-2"><Image src="/marsha.jpg" alt="Marsha JKT48" width={24} height={24} className="h-6 w-6 rounded-full" /><span>Marsha JKT48</span></div>
-                  <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">Show Profile</button>
+                  <div className="flex items-center gap-2"><Image src="/marsha.jpg" alt="Marsha JKT48" width={24} height={24} className="h-6 w-6 rounded-full object-cover" /><span>Marsha JKT48</span></div>
+                  <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">
+                    <i className="uil uil-external-link-alt mr-2"></i>Lihat Profil
+                  </button>
                 </div>
               </div>
               <div className="bg-gray-100 p-4 rounded-lg">
@@ -314,7 +316,7 @@ export default function Home() {
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><i className="uil uil-music-alt"></i><span>All Girls Are The Same</span></div>
                   <button onClick={handleMusicToggle} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">
-                    {isMusicPlaying ? <><i className="uil uil-pause mr-2"></i> Stop Music</> : <><i className="uil uil-play mr-2"></i> Play Music</>}
+                    {isMusicPlaying ? <><i className="uil uil-pause mr-2"></i> Hentikan Musik</> : <><i className="uil uil-play mr-2"></i> Putar Musik</>}
                   </button>
                 </div>
               </div>
@@ -322,7 +324,9 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-qrcode-scan"></i> Bagikan Profil</h3>
                 <div className="flex flex-col items-start gap-2">
                   <span className="text-gray-600 text-sm">Pindai untuk mengunjungi website ini di perangkat lain.</span>
-                  <button onClick={() => setIsQrModalOpen(true)} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">Tampilkan QR</button>
+                  <button onClick={() => setIsQrModalOpen(true)} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">
+                    <i className="uil uil-qrcode-scan mr-2"></i>Tampilkan QR
+                  </button>
                 </div>
               </div>
             </div>
