@@ -37,8 +37,6 @@ const LanguageSwitcher = () => {
     };
   }, [switcherRef]);
 
-  const currentLanguage = languages.find(lang => lang.locale === router.locale);
-
   return (
     <div className="relative" ref={switcherRef}>
       <button
@@ -46,17 +44,7 @@ const LanguageSwitcher = () => {
         className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors duration-200"
         aria-label="Change language"
       >
-        {currentLanguage ? (
-          <Image 
-            src={currentLanguage.flag} 
-            alt={currentLanguage.name}
-            width={24}
-            height={24}
-            className="rounded-full" 
-          />
-        ) : (
-          <i className="uil uil-globe text-xl text-gray-700 dark:text-gray-300"></i>
-        )}
+        <i className="uil uil-globe text-xl text-gray-700 dark:text-gray-300"></i>
       </button>
 
       {isOpen && (
@@ -68,13 +56,15 @@ const LanguageSwitcher = () => {
                   onClick={() => handleLocaleChange(lang.locale)}
                   className={`w-full text-left px-4 py-2 text-sm flex items-center gap-3 text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 ${router.locale === lang.locale ? 'font-bold' : ''}`}
                 >
-                  <Image 
-                    src={lang.flag} 
-                    alt={lang.name}
-                    width={20}
-                    height={20}
-                    className="rounded-full"
-                  />
+                  <div className="w-5 h-5 relative">
+                    <Image 
+                      src={lang.flag} 
+                      alt={lang.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-full"
+                    />
+                  </div>
                   <span>{lang.name}</span>
                 </button>
               </li>
