@@ -42,14 +42,14 @@ export default function Home() {
   const [profileImage, setProfileImage] = useState('/nephyy2.gif');
   const audioRef = useRef(null);
   
-  const springTransition = { type: "spring", stiffness: 400, damping: 17 };
+  const springTransition = { type: "spring", stiffness: 300, damping: 20 };
   
   const gridContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.2
       }
     }
   };
@@ -190,7 +190,7 @@ export default function Home() {
             <p className="text-xl mb-8">{t('home.subtitle')}</p>
             <motion.a 
               href="https://store.nephyy.biz.id"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               transition={springTransition}
             >
@@ -263,7 +263,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-user"></i> {t('details.idol')}</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><Image src="/marsha.jpg" alt="Marsha JKT48" width={24} height={24} className="h-6 w-6 rounded-full object-cover" /><span>Marsha JKT48</span></div>
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
+                  <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
                     <i className="uil uil-external-link-alt mr-2"></i>{t('details.view_profile')}
                   </motion.button>
                 </div>
@@ -272,7 +272,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-music"></i> {t('details.music')}</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><i className="uil uil-music-alt"></i><span>All Girls Are The Same</span></div>
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={handleMusicToggle} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
+                  <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={handleMusicToggle} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
                     {isMusicPlaying ? <><i className="uil uil-pause mr-2"></i> {t('details.stop_music')}</> : <><i className="uil uil-play mr-2"></i> {t('details.play_music')}</>}
                   </motion.button>
                 </div>
@@ -281,7 +281,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-qrcode-scan"></i> {t('details.share')}</h3>
                 <div className="flex flex-col items-start gap-2">
                   <span className="text-gray-600 text-sm">{t('details.share_description')}</span>
-                   <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={() => setIsQrModalOpen(true)} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
+                   <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={() => setIsQrModalOpen(true)} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
                     <i className="uil uil-qrcode-scan mr-2"></i>{t('details.show_qr')}
                   </motion.button>
                 </div>
@@ -304,7 +304,7 @@ export default function Home() {
                 <motion.div 
                   key={item.id}
                   variants={gridItemVariants}
-                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileHover={{ scale: 1.07, y: -8 }}
                   transition={springTransition}
                   onClick={() => setSelectedItem(item)} 
                   className="bg-white p-6 rounded-lg shadow-md portfolio-card"
@@ -337,7 +337,7 @@ export default function Home() {
                 <motion.div 
                   key={item.id} 
                   variants={gridItemVariants}
-                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileHover={{ scale: 1.07, y: -8 }}
                   transition={springTransition}
                   onClick={() => setSelectedItem(item)} 
                   className="bg-white p-6 rounded-lg shadow-md portfolio-card"
@@ -393,7 +393,7 @@ export default function Home() {
                 href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} 
                 target="_blank" rel="noopener noreferrer" 
                 className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 transition={springTransition}
               >
@@ -484,7 +484,7 @@ export default function Home() {
                 <motion.a 
                   href={selectedItem.repoLink} 
                   target="_blank" rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   transition={springTransition}
                 >
@@ -530,4 +530,4 @@ export default function Home() {
       )}
     </>
   );
-            }
+      }
