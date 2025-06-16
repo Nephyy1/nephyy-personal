@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export default function ScrollProgressBar() {
+const ScrollProgressBar = () => {
   const [scroll, setScroll] = useState(0);
 
   const onScroll = () => {
-    const Scrolled = document.documentElement.scrollTop;
-    const MaxHeight =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-    const ScrollPercent = (Scrolled / MaxHeight) * 100;
-    setScroll(ScrollPercent);
+    const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPosition = document.documentElement.scrollTop;
+    setScroll((scrollPosition / scrollTotal) * 100);
   };
 
   useEffect(() => {
@@ -18,11 +15,13 @@ export default function ScrollProgressBar() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+    <div className="fixed top-0 left-0 w-full h-1 z-50">
       <div
-        className="h-1 bg-blue-500"
+        className="h-full bg-gradient-to-r from-blue-400 to-purple-500"
         style={{ width: `${scroll}%` }}
-      ></div>
+      />
     </div>
   );
-}
+};
+
+export default ScrollProgressBar;
