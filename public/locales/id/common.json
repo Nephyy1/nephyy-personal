@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "Tentang",
+    "portfolio": "Portfolio",
+    "certificate": "Sertifikat",
+    "skill": "Keahlian",
+    "contact": "Kontak"
+  },
+  "home": {
+    "welcome": "Selamat Datang",
+    "subtitle": "Di Nephyy Personal Web!",
+    "visit_store": "Kunjungi Toko Saya"
+  },
+  "about": {
+    "title": "Tentang Saya",
+    "description": "Saya memulai perjalanan di dunia teknologi dengan belajar pemrograman secara mandiri. Saya memanfaatkan waktu selama pandemi untuk mendalami pengembangan web dan menemukan minat besar saya dalam bidang ini.",
+    "change_image_label": "Ganti gambar profil"
+  },
+  "timeline": {
+    "title": "Timeline Perjalanan Saya",
+    "items": [
+      { "year": "2020", "title": "Awal Perjalanan", "description": "Karena pandemi, saya mulai belajar pemrograman secara otodidak melalui YouTube. Fokus awal pada HTML, CSS, dan dasar-dasar JavaScript.", "icon": "uil-rocket" },
+      { "year": "2021", "title": "Proyek Pertama", "description": "Berhasil membangun beberapa website statis sederhana untuk teman dan komunitas sebagai latihan untuk mengasah kemampuan front-end.", "icon": "uil-lightbulb-alt" },
+      { "year": "2022", "title": "Mempelajari Backend", "description": "Mulai mendalami sisi server dengan belajar PHP dan Node.js, serta membuat bot WhatsApp & Telegram pertama saya.", "icon": "uil-server-network" },
+      { "year": "2023", "title": "Ekosistem Modern", "description": "Beralih ke ekosistem JavaScript modern dengan mempelajari React.js dan Next.js untuk membangun aplikasi web yang lebih interaktif dan cepat.", "icon": "uil-react" },
+      { "year": "2025", "title": "Terus Berkembang", "description": "Mulai mengeksplorasi bidang baru seperti AI dan memperdalam keahlian database dengan SQL, sambil terus mengikuti perkembangan teknologi web.", "icon": "uil-brain" }
+    ]
+  },
+  "details": {
+    "hobbies": "Hobi",
+    "idol": "Oshi/Idol",
+    "music": "Musik Favorit",
+    "share": "Bagikan Profil",
+    "view_profile": "Lihat Profil",
+    "play_music": "Putar Musik",
+    "stop_music": "Hentikan Musik",
+    "show_qr": "Tampilkan QR",
+    "share_description": "Pindai untuk mengunjungi website ini di perangkat lain."
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "items": [
+      { "id": 1, "title": "Website Portofolio Pribadi", "shortDescription": "Platform digital untuk menampilkan profil, proyek, dan keahlian saya.", "image": "/personal.jpg", "tags": ["Web", "Design"], "longDescription": "Website portofolio pribadi yang sedang Anda lihat sekarang. Dibuat untuk menampilkan profil, proyek, dan keahlian saya dalam pengembangan web. Dibangun dari awal menggunakan Next.js dan Tailwind CSS.", "repoLink": "https://github.com/" },
+      { "id": 2, "title": "Platform E-Commerce", "shortDescription": "Solusi toko online fungsional untuk transaksi jual beli produk.", "image": "/nephyystore.jpg", "tags": ["Web", "Design"], "longDescription": "Sebuah platform e-commerce sederhana yang dirancang untuk memfasilitasi penjualan produk secara online. Dilengkapi dengan katalog produk, sistem keranjang, dan integrasi pembayaran.", "repoLink": "https://github.com/" },
+      { "id": 3, "title": "Asisten Virtual (Bot) WhatsApp & Telegram", "shortDescription": "Bot otomatis berbasis Node.js untuk interaksi dan layanan mandiri.", "image": "/bot.jpg", "tags": ["Bot", "API"], "longDescription": "Bot asisten otomatis untuk platform WhatsApp dan Telegram. Dibuat menggunakan Node.js untuk menangani perintah, memberikan respons otomatis, dan terhubung dengan berbagai API eksternal.", "repoLink": "https://github.com/" }
+    ]
+  },
+  "certificate": {
+    "title": "Sertifikat",
+    "items": [
+      { "id": 4, "title": "Sertifikat Web Developer", "shortDescription": "Sertifikat Kelulusan Bootcamp.", "image": "/certificate1.png", "tags": ["Official"], "longDescription": "Sertifikat ini diberikan setelah berhasil menyelesaikan bootcamp intensif pengembangan web yang mencakup HTML, CSS, JavaScript, dan framework modern." },
+      { "id": 5, "title": "Sertifikat Artificial Intelligence", "shortDescription": "Dasar-dasar Kecerdasan Buatan.", "image": "/certificate2.png", "tags": ["Official"], "longDescription": "Sertifikat kelulusan kursus dasar-dasar Artifical Intelligence, mempelajari konsep machine learning, neural networks, dan implementasinya." },
+      { "id": 6, "title": "Sertifikat SQL Database", "shortDescription": "Manajemen Database SQL.", "image": "/certificate3.png", "tags": ["Official"], "longDescription": "Sertifikat yang menandakan penguasaan dalam manajemen database, termasuk query SQL, perancangan skema, dan optimisasi performa." }
+    ]
+  },
+  "skills": {
+    "title": "Keahlian"
+  },
+  "contact": {
+    "title": "Kirim Pesan Whatsapp",
+    "placeholder": "Tulis pesan anda disini...",
+    "send": "Kirim Pesan Whatsapp"
+  },
+  "footer": {
+    "description": "Personal web portofolio untuk menampilkan karya dan perjalanan saya di dunia teknologi.",
+    "navigation": "Navigasi",
+    "find_me": "Temukan Saya",
+    "contact_info": "Kontak",
+    "contact_text": "Tertarik untuk bekerja sama? Silakan hubungi saya melalui form kontak di atas atau sosial media.",
+    "copyright": "Nephyy. Hak cipta dilindungi undang-undang."
+  },
+  "modal": {
+    "github_code": "Kode GitHub",
+    "share_title": "Bagikan Profil Saya",
+    "share_scan": "Pindai kode di atas untuk membuka web ini di perangkat lain.",
+    "close_label": "Tutup modal"
+  }
+}
