@@ -273,7 +273,7 @@ export default function Home() {
               </button>
             </div>
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
-            <p className="text-lg leading-relaxed mb-16">Saya adalah seorang pemula di bidang teknologi, saya belajar pemrograman otodidak lewat youtube karena bosan waktu covid 19 tidak ada kegiatan :(</p>
+            <p className="text-lg leading-relaxed mb-16">Saya memulai perjalanan di dunia teknologi dengan belajar pemrograman secara mandiri. Saya memanfaatkan waktu selama pandemi untuk mendalami pengembangan web dan menemukan minat besar saya dalam bidang ini.</p>
 
             <div className="container mx-auto px-4 py-8">
               <h3 className="text-3xl font-bold text-center mb-12">Timeline Perjalanan Saya</h3>
@@ -306,14 +306,14 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-user"></i> Oshi/Idol</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><Image src="/marsha.jpg" alt="Marsha JKT48" width={24} height={24} className="h-6 w-6 rounded-full" /><span>Marsha JKT48</span></div>
-                  <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="btn-interactive px-4 py-1 bg-gradient-to-r from-green-400 to-blue-400 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">Show Profile</button>
+                  <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">Show Profile</button>
                 </div>
               </div>
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-music"></i> Fav Music</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><i className="uil uil-music-alt"></i><span>All Girls Are The Same</span></div>
-                  <button onClick={handleMusicToggle} className="btn-interactive px-4 py-1 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">
+                  <button onClick={handleMusicToggle} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">
                     {isMusicPlaying ? <><i className="uil uil-pause mr-2"></i> Stop Music</> : <><i className="uil uil-play mr-2"></i> Play Music</>}
                   </button>
                 </div>
@@ -322,7 +322,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-qrcode-scan"></i> Bagikan Profil</h3>
                 <div className="flex flex-col items-start gap-2">
                   <span className="text-gray-600 text-sm">Pindai untuk mengunjungi website ini di perangkat lain.</span>
-                  <button onClick={() => setIsQrModalOpen(true)} className="btn-interactive px-4 py-1 bg-gradient-to-r from-gray-600 to-gray-800 text-white rounded-full shadow-md transform hover:scale-105 transition duration-300">Tampilkan QR</button>
+                  <button onClick={() => setIsQrModalOpen(true)} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">Tampilkan QR</button>
                 </div>
               </div>
             </div>
