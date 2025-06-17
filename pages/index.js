@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { Parallax, ParallaxBanner } from 'react-scroll-parallax';
 import ScrollProgressBar from "../components/ScrollProgressBar";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from 'next-i18next';
@@ -107,7 +106,7 @@ export default function Home() {
         <meta name="twitter:image" content="https://nephyy.tech/favicon.ico" />
         <style>{`
           html, body { scroll-behavior: smooth; overflow-x: hidden; }
-          body { font-family: 'Montserrat', sans-serif; background-color: #e0e7ff; }
+          body { font-family: 'Montserrat', sans-serif; }
           .portfolio-card { perspective: 1000px; transition: transform 0.5s, box-shadow 0.5s; cursor: pointer; }
           .portfolio-card:hover { transform: scale(1.05) rotateY(6deg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
           @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -120,96 +119,87 @@ export default function Home() {
           .btn-interactive:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
           .input-interactive { transition: border-color 0.3s; }
           .input-interactive:focus { border-color: #34D399; }
+          @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
+          .animate-slide { animation: fadeIn 0.5s ease-out, slide 3s linear infinite; }
           .modal-content { animation: fadeIn 0.3s ease-out; }
           .qr-code-image { transition: transform 0.3s ease-in-out; }
           .qr-code-image:hover { transform: scale(1.05); }
-          .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 5s infinite; }
-          @keyframes twinkle { 50% { opacity: 0.5; } }
         `}</style>
       </Head>
 
       <ScrollProgressBar />
 
-      <div className="text-gray-900">
+      <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
         <audio id="fav-music" src="/music.mp3" loop ref={audioRef}></audio>
         <nav className="fixed w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm">
-            <div className="max-w-7xl mx-auto px-4">
-                <div className="flex justify-between items-center py-4">
-                    <div className="text-xl font-bold">Nephyy <i className="uil uil-check-circle text-blue-500"></i></div>
-                    <div className="hidden md:flex items-center space-x-4">
-                        <a href="#home" className="hover:text-blue-500 transition-colors duration-300">{t('nav.home')}</a>
-                        <a href="#about" className="hover:text-blue-500 transition-colors duration-300">{t('nav.about')}</a>
-                        <a href="#portfolio" className="hover:text-blue-500 transition-colors duration-300">{t('nav.portfolio')}</a>
-                        <a href="#certificate" className="hover:text-blue-500 transition-colors duration-300">{t('nav.certificate')}</a>
-                        <a href="#skills" className="hover:text-blue-500 transition-colors duration-300">{t('nav.skill')}</a>
-                        <a href="#contact" className="hover:text-blue-500 transition-colors duration-300">{t('nav.contact')}</a>
-                        <LanguageSwitcher />
-                    </div>
-                    <div className="md:hidden flex items-center space-x-4">
-                        <LanguageSwitcher />
-                        <button id="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl focus:outline-none" aria-label="Toggle Menu">
-                            {isMenuOpen ? <i className="uil uil-times"></i> : <i className="uil uil-bars"></i>}
-                        </button>
-                    </div>
-                </div>
-                {isMenuOpen && (
-                    <div id="mobile-menu" className="md:hidden animate-in">
-                        <div className="flex flex-col space-y-2 pb-4">
-                            <a href="#home" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-home mr-2"></i>{t('nav.home')}</a>
-                            <a href="#about" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-user mr-2"></i>{t('nav.about')}</a>
-                            <a href="#portfolio" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-briefcase-alt mr-2"></i>{t('nav.portfolio')}</a>
-                            <a href="#certificate" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-award mr-2"></i>{t('nav.certificate')}</a>
-                            <a href="#skills" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-brackets-curly mr-2"></i>{t('nav.skill')}</a>
-                            <a href="#contact" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-envelope mr-2"></i>{t('nav.contact')}</a>
-                        </div>
-                    </div>
-                )}
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex justify-between items-center py-4">
+              <div className="text-xl font-bold">Nephyy <i className="uil uil-check-circle text-blue-500"></i></div>
+              <div className="hidden md:flex items-center space-x-4">
+                <a href="#home" className="hover:text-blue-500 transition-colors duration-300">{t('nav.home')}</a>
+                <a href="#about" className="hover:text-blue-500 transition-colors duration-300">{t('nav.about')}</a>
+                <a href="#portfolio" className="hover:text-blue-500 transition-colors duration-300">{t('nav.portfolio')}</a>
+                <a href="#certificate" className="hover:text-blue-500 transition-colors duration-300">{t('nav.certificate')}</a>
+                <a href="#skills" className="hover:text-blue-500 transition-colors duration-300">{t('nav.skill')}</a>
+                <a href="#contact" className="hover:text-blue-500 transition-colors duration-300">{t('nav.contact')}</a>
+                <LanguageSwitcher />
+              </div>
+              <div className="md:hidden flex items-center space-x-4">
+                   <LanguageSwitcher />
+                <button id="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl focus:outline-none" aria-label="Toggle Menu">
+                  {isMenuOpen ? <i className="uil uil-times"></i> : <i className="uil uil-bars"></i>}
+                </button>
+              </div>
             </div>
+            {isMenuOpen && (
+              <div id="mobile-menu" className="md:hidden animate-in">
+                <div className="flex flex-col space-y-2 pb-4">
+                  <a href="#home" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-home mr-2"></i>{t('nav.home')}</a>
+                  <a href="#about" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-user mr-2"></i>{t('nav.about')}</a>
+                  <a href="#portfolio" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-briefcase-alt mr-2"></i>{t('nav.portfolio')}</a>
+                  <a href="#certificate" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-award mr-2"></i>{t('nav.certificate')}</a>
+                  <a href="#skills" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-brackets-curly mr-2"></i>{t('nav.skill')}</a>
+                  <a href="#contact" onClick={handleMenuLinkClick} className="block hover:text-blue-500 transition-colors duration-300"><i className="uil uil-envelope mr-2"></i>{t('nav.contact')}</a>
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
         
-        <ParallaxBanner id="home" style={{ height: '100vh' }} layers={[
-            {
-              style: { background: 'linear-gradient(to right, #818cf8, #c084fc)', },
-              speed: -20,
-            },
-            {
-              speed: -15,
-              children: (
-                <div className="absolute inset-0">
-                  <div className="star" style={{top: '20%', left: '10%', width: '2px', height: '2px'}}></div>
-                  <div className="star" style={{top: '40%', left: '80%', width: '3px', height: '3px', animationDelay: '1s'}}></div>
-                  <div className="star" style={{top: '70%', left: '30%', width: '2px', height: '2px', animationDelay: '2s'}}></div>
-                  <div className="star" style={{top: '80%', left: '90%', width: '1px', height: '1px', animationDelay: '0.5s'}}></div>
-                  <div className="star" style={{top: '10%', left: '50%', width: '2px', height: '2px', animationDelay: '1.5s'}}></div>
-                </div>
-              ),
-            },
-            {
-              speed: 5,
-              children: (
-                <div className="absolute inset-0 flex items-center justify-center" data-aos="fade-up">
-                  <div className="text-center px-4 text-white">
-                    <h1 className="text-5xl font-extrabold mb-4">{t('home.welcome')}</h1>
-                    <p className="text-xl mb-8">{t('home.subtitle')}</p>
-                    <a href="https://store.nephyy.biz.id">
-                      <button className="btn-interactive px-6 py-3 bg-white text-gray-900 rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-2xl duration-300">
-                        <i className="uil uil-rocket mr-2"></i>{t('home.visit_store')}
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              )
-            },
-        ]} />
+        <section id="home" className="min-h-screen flex items-center justify-center pt-20" data-aos="fade-up">
+          <div className="text-center px-4">
+            <h1 className="text-5xl font-extrabold mb-4">{t('home.welcome')}</h1>
+            <p className="text-xl mb-8">{t('home.subtitle')}</p>
+            <a href="https://store.nephyy.biz.id">
+              <button className="btn-interactive px-6 py-3 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-2xl duration-300">
+                <i className="uil uil-rocket mr-2"></i>{t('home.visit_store')}
+              </button>
+            </a>
+          </div>
+        </section>
 
         <section id="about" className="py-20 bg-white relative overflow-hidden">
-          <Parallax speed={-10} translateX={['-100px', '100px']} className="absolute left-0 top-[-12px] opacity-75 z-0">
-              <Image src="/nyan-cat.gif" alt="Nyan Cat Animation" width={200} height={100} />
-          </Parallax>
+          <Image src="/nyan-cat.gif" alt="Nyan Cat Animation" width={200} height={100} style={{ top: "-12px" }} className="absolute left-0 opacity-50 animate-slide" />
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <div className="relative inline-block mb-8 group" onClick={handleProfileImageClick}>
-              <Image src={profileImage} alt="Profile" className={`mx-auto rounded-full shadow-lg w-32 h-32 object-cover transition-transform duration-300 ease-in-out ${profileImage === '/qr-code.png' ? 'cursor-pointer hover:scale-105' : 'hover:scale-110'}`} width="200" height="200" />
-              <button onClick={(e) => { e.stopPropagation(); handleProfileImageSwap(); }} aria-label={t('about.change_image_label')} className="absolute -bottom-2 -right-2 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-transform duration-300 transform hover:scale-110 focus:outline-none">
+            <div 
+              className="relative inline-block mb-8 group" 
+              onClick={handleProfileImageClick}
+            >
+              <Image 
+                src={profileImage} 
+                alt="Profile" 
+                className={`mx-auto rounded-full shadow-lg w-32 h-32 object-cover transition-transform duration-300 ease-in-out ${profileImage === '/qr-code.png' ? 'cursor-pointer hover:scale-105' : 'hover:scale-110'}`} 
+                width="200" 
+                height="200" 
+              />
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleProfileImageSwap();
+                }} 
+                aria-label={t('about.change_image_label')} 
+                className="absolute -bottom-2 -right-2 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-transform duration-300 transform hover:scale-110 focus:outline-none"
+              >
                 <i className="uil uil-sync text-xl text-gray-800"></i>
               </button>
             </div>
@@ -225,7 +215,10 @@ export default function Home() {
                     <div className="absolute left-4 top-1 md:left-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white -translate-x-1/2">
                       <i className={`${item.icon} text-lg`}></i>
                     </div>
-                    <div className={`p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-lg ml-12 md:ml-0 md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'}`} data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}>
+                    <div 
+                      className={`p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-lg ml-12 md:ml-0 md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'}`}
+                      data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+                    >
                       <p className="text-sm font-semibold text-blue-600">{item.year}</p>
                       <h4 className="font-bold text-gray-800 text-lg mb-1">{item.title}</h4>
                       <p className="text-sm leading-snug tracking-wide text-gray-600">{item.description}</p>
@@ -271,103 +264,85 @@ export default function Home() {
           </div>
         </section>
         
-        <div className="relative bg-gradient-to-b from-blue-200 to-blue-300 overflow-hidden">
-            <Parallax speed={-15} className="absolute top-1/4 left-0 w-1/4 opacity-50 z-0">
-                <Image src="https://www.pngall.com/wp-content/uploads/2/White-Cloud-PNG-Clipart.png" alt="Cloud" width={300} height={200} />
-            </Parallax>
-            <Parallax speed={-10} className="absolute top-1/2 right-0 w-1/3 opacity-50 z-0">
-                <Image src="https://pngimg.com/uploads/cloud/cloud_PNG23.png" alt="Cloud" width={400} height={250} />
-            </Parallax>
-            <Parallax speed={-5} className="absolute top-0 left-1/2 w-1/5 opacity-40 z-0">
-                <Image src="https://www.pngall.com/wp-content/uploads/2/White-Cloud-PNG-Clipart.png" alt="Cloud" width={200} height={150} />
-            </Parallax>
-
-            <section id="portfolio" className="py-20 relative z-10">
-              <div className="max-w-7xl mx-auto px-4">
-                <h2 className="text-4xl font-bold mb-6 text-center">{t('portfolio.title')}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {portfolioData.map((item) => (
-                    <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up">
-                      <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
-                      <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
-                      <p>{item.shortDescription}</p>
-                      <div className="mt-4">
-                        {item.tags.map(tag => (
-                            <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+        <section id="portfolio" className="py-20">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl font-bold mb-6 text-center">{t('portfolio.title')}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {portfolioData.map((item) => (
+                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up">
+                  <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
+                  <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
+                  <p>{item.shortDescription}</p>
+                  <div className="mt-4">
+                    {item.tags.map(tag => (
+                       <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </section>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <section id="certificate" className="py-20 relative z-10">
-              <div className="max-w-7xl mx-auto px-4 text-center">
-                <h2 className="text-4xl font-bold mb-6">{t('certificate.title')}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {certificateData.map((item) => (
-                    <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in">
-                      <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
-                      <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
-                      <p>{item.shortDescription}</p>
-                      <div className="mt-2">
-                        <span className="inline-block bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded-full"><i className="uil uil-award"></i> {item.tags[0]}</span>
-                      </div>
-                    </div>
-                  ))}
+        <section id="certificate" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold mb-6">{t('certificate.title')}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {certificateData.map((item) => (
+                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in">
+                  <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
+                  <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
+                  <p>{item.shortDescription}</p>
+                  <div className="mt-2">
+                    <span className="inline-block bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded-full"><i className="uil uil-award"></i> {item.tags[0]}</span>
+                  </div>
                 </div>
-              </div>
-            </section>
-        </div>
+              ))}
+            </div>
+          </div>
+        </section>
         
-        <div className="relative bg-gradient-to-b from-blue-300 to-indigo-400 overflow-hidden">
-             <Parallax speed={-10} className="absolute bottom-0 left-0 w-full opacity-70 z-0">
-                <Image src="https://www.pngkey.com/png/full/2-24375_skyline-silhouette-png-city-skyline-silhouette-png.png" alt="City Skyline" width={1920} height={1080} className="w-full object-cover" />
-            </Parallax>
-            
-            <section id="skills" className="py-20 relative z-10">
-              <div className="max-w-4xl mx-auto px-4">
-                <h2 className="text-4xl font-bold mb-6 text-center">{t('skills.title')}</h2>
-                <div className="space-y-8 bg-white/30 backdrop-blur-sm p-8 rounded-lg">
-                  <div>
-                    <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/48/000000/html-5.png" className="h-6 w-6" alt="HTML Icon" /> HTML</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-red-500 h-4 rounded-full" style={{ "--target-width": "90%" }}></div></div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/000000/css3.png" className="h-6 w-6" alt="CSS Icon" /> CSS</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-blue-500 h-4 rounded-full" style={{ "--target-width": "85%" }}></div></div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/?size=100&id=plPz67QUdeWA&format=png&color=000000" className="h-6 w-6" alt="PHP Icon" /> PHP</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-purple-500 h-4 rounded-full" style={{ "--target-width": "75%" }}></div></div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/48/000000/javascript.png" className="h-6 w-6" alt="JS Icon" /> JavaScript</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-yellow-500 h-4 rounded-full" style={{ "--target-width": "80%" }}></div></div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/48/000000/database.png" className="h-6 w-6" alt="Database Icon" /> Database</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-green-500 h-4 rounded-full" style={{ "--target-width": "70%" }}></div></div>
-                  </div>
-                </div>
+        <section id="skills" className="py-20">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-4xl font-bold mb-6 text-center">{t('skills.title')}</h2>
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/48/000000/html-5.png" className="h-6 w-6" alt="HTML Icon" /> HTML</h3>
+                <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-red-500 h-4 rounded-full" style={{ "--target-width": "90%" }}></div></div>
               </div>
-            </section>
+              <div>
+                <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/000000/css3.png" className="h-6 w-6" alt="CSS Icon" /> CSS</h3>
+                <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-blue-500 h-4 rounded-full" style={{ "--target-width": "85%" }}></div></div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/?size=100&id=plPz67QUdeWA&format=png&color=000000" className="h-6 w-6" alt="PHP Icon" /> PHP</h3>
+                <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-purple-500 h-4 rounded-full" style={{ "--target-width": "75%" }}></div></div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/48/000000/javascript.png" className="h-6 w-6" alt="JS Icon" /> JavaScript</h3>
+                <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-yellow-500 h-4 rounded-full" style={{ "--target-width": "80%" }}></div></div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-medium mb-2 flex items-center justify-center gap-2"><img src="https://img.icons8.com/color/48/000000/database.png" className="h-6 w-6" alt="Database Icon" /> Database</h3>
+                <div className="w-full bg-gray-200 rounded-full h-4"><div className="progress-fill bg-green-500 h-4 rounded-full" style={{ "--target-width": "70%" }}></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <section id="contact" className="py-20 relative z-10">
-              <div className="max-w-4xl mx-auto px-4">
-                <h2 className="text-4xl font-bold mb-6 text-center">{t('contact.title')}</h2>
-                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-lg shadow-md flex flex-col items-center">
-                  <div className="w-full mb-4">
-                    <textarea value={whatsappMessage} onChange={(e) => setWhatsappMessage(e.target.value)} id="whatsapp-message" placeholder={t('contact.placeholder')} className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 border border-transparent focus:outline-none focus:border-transparent focus:ring-0 input-interactive" rows="4"></textarea>
-                  </div>
-                  <a href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
-                    <i className="uil uil-whatsapp mr-2"></i>{t('contact.send')}
-                  </a>
-                </div>
+        <section id="contact" className="py-20 bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-4xl font-bold mb-6 text-center">{t('contact.title')}</h2>
+            <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+              <div className="w-full mb-4">
+                <textarea value={whatsappMessage} onChange={(e) => setWhatsappMessage(e.target.value)} id="whatsapp-message" placeholder={t('contact.placeholder')} className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 border border-transparent focus:outline-none focus:border-transparent focus:ring-0 input-interactive" rows="4"></textarea>
               </div>
-            </section>
-        </div>
+              <a href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
+                <i className="uil uil-whatsapp mr-2"></i>{t('contact.send')}
+              </a>
+            </div>
+          </div>
+        </section>
         
         <footer className="bg-white text-gray-800 pt-16 pb-8 px-4">
           <div className="max-w-7xl mx-auto">
@@ -412,9 +387,19 @@ export default function Home() {
       </div>
 
       {selectedItem && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" onClick={() => setSelectedItem(null)}>
-          <div className="bg-white rounded-lg shadow-2xl max-w-lg w-full p-6 relative modal-content" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedItem(null)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl" aria-label={t('modal.close_label')}>
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" 
+          onClick={() => setSelectedItem(null)}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-2xl max-w-lg w-full p-6 relative modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setSelectedItem(null)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl"
+              aria-label={t('modal.close_label')}
+            >
               <i className="uil uil-times"></i>
             </button>
             <Image src={selectedItem.image} alt={selectedItem.title} width={600} height={400} className="w-full rounded-md mb-4" />
@@ -436,9 +421,19 @@ export default function Home() {
       )}
 
       {isQrModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" onClick={() => setIsQrModalOpen(false)}>
-          <div className="bg-white rounded-lg shadow-2xl max-w-xs w-full p-6 relative modal-content text-center" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setIsQrModalOpen(false)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl" aria-label={t('modal.close_label')}>
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" 
+          onClick={() => setIsQrModalOpen(false)}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-2xl max-w-xs w-full p-6 relative modal-content text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setIsQrModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl"
+              aria-label={t('modal.close_label')}
+            >
               <i className="uil uil-times"></i>
             </button>
             <h3 className="text-2xl font-bold mb-4">{t('modal.share_title')}</h3>
@@ -450,4 +445,4 @@ export default function Home() {
       )}
     </>
   );
-      }
+}
