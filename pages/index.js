@@ -192,13 +192,13 @@ export default function Home() {
               <Image src="/white cloud.webp" layout="fill" objectFit="cover" alt="cloud layer" />
           </div>
           <div
-              className="absolute w-48 h-48 bottom-20 left-10 z-10"
+              className="absolute w-32 h-32 bottom-4 left-2 md:w-48 md:h-48 md:bottom-20 md:left-10 z-10"
               style={{ transform: `translateY(${offsetY * 0.45}px)` }}
           >
               <Image src="/cloud 1.webp" layout="fill" objectFit="contain" alt="cloud 1" />
           </div>
           <div
-              className="absolute w-64 h-64 bottom-10 right-10 z-10"
+              className="absolute w-36 h-36 bottom-2 right-2 md:w-64 md:h-64 md:bottom-10 md:right-10 z-10"
               style={{ transform: `translateY(${offsetY * 0.3}px)` }}
           >
               <Image src="/cloud 2.webp" layout="fill" objectFit="contain" alt="cloud 2" />
