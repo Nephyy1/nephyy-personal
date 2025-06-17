@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import ScrollProgressBar from "../components/ScrollProgressBar";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from 'next-i18next';
@@ -33,7 +32,7 @@ export default function Home() {
     Bot: "bg-red-200 text-red-800",
     API: "bg-indigo-200 text-indigo-800",
   };
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [whatsappMessage, setWhatsappMessage] = useState("");
@@ -41,26 +40,6 @@ export default function Home() {
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [profileImage, setProfileImage] = useState('/nephyy2.gif');
   const audioRef = useRef(null);
-  
-  const springTransition = { type: "spring", stiffness: 300, damping: 20 };
-  
-  const gridContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const gridItemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -100,7 +79,7 @@ export default function Home() {
     }
   };
 
-  const modalButtonClasses = "w-full px-5 py-2.5 text-white font-semibold rounded-full shadow-lg flex items-center justify-center";
+  const modalButtonClasses = "w-full px-5 py-2.5 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center";
 
   return (
     <>
@@ -128,13 +107,16 @@ export default function Home() {
         <style>{`
           html, body { scroll-behavior: smooth; overflow-x: hidden; }
           body { font-family: 'Montserrat', sans-serif; }
-          .portfolio-card { perspective: 1000px; cursor: pointer; }
+          .portfolio-card { perspective: 1000px; transition: transform 0.5s, box-shadow 0.5s; cursor: pointer; }
+          .portfolio-card:hover { transform: scale(1.05) rotateY(6deg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
           @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
           @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
           .animate-in { animation: fadeIn 0.3s ease-out forwards; }
           .animate-out { animation: fadeOut 0.3s ease-out forwards; }
           .progress-fill { width: 0; animation: fillBar 2s forwards; }
           @keyframes fillBar { from { width: 0; } to { width: var(--target-width); } }
+          .btn-interactive { transition: transform 0.3s, box-shadow 0.3s; }
+          .btn-interactive:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
           .input-interactive { transition: border-color 0.3s; }
           .input-interactive:focus { border-color: #34D399; }
           @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
@@ -188,16 +170,11 @@ export default function Home() {
           <div className="text-center px-4">
             <h1 className="text-5xl font-extrabold mb-4">{t('home.welcome')}</h1>
             <p className="text-xl mb-8">{t('home.subtitle')}</p>
-            <motion.a 
-              href="https://store.nephyy.biz.id"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={springTransition}
-            >
-              <button className="px-6 py-3 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
+            <a href="https://store.nephyy.biz.id">
+              <button className="btn-interactive px-6 py-3 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-2xl duration-300">
                 <i className="uil uil-rocket mr-2"></i>{t('home.visit_store')}
               </button>
-            </motion.a>
+            </a>
           </div>
         </section>
 
@@ -215,19 +192,16 @@ export default function Home() {
                 width="200" 
                 height="200" 
               />
-              <motion.button 
+              <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   handleProfileImageSwap();
                 }} 
                 aria-label={t('about.change_image_label')} 
-                className="absolute -bottom-2 -right-2 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg focus:outline-none"
-                whileHover={{ scale: 1.15, rotate: 30 }}
-                whileTap={{ scale: 0.9 }}
-                transition={springTransition}
+                className="absolute -bottom-2 -right-2 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-transform duration-300 transform hover:scale-110 focus:outline-none"
               >
                 <i className="uil uil-sync text-xl text-gray-800"></i>
-              </motion.button>
+              </button>
             </div>
             <h2 className="text-4xl font-bold mb-6">{t('about.title')}</h2>
             <p className="text-lg leading-relaxed mb-16">{t('about.description')}</p>
@@ -263,27 +237,27 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-user"></i> {t('details.idol')}</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><Image src="/marsha.jpg" alt="Marsha JKT48" width={24} height={24} className="h-6 w-6 rounded-full object-cover" /><span>Marsha JKT48</span></div>
-                  <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
+                  <button onClick={() => window.open("https://instagram.com/marsha_jkt48", "_blank")} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">
                     <i className="uil uil-external-link-alt mr-2"></i>{t('details.view_profile')}
-                  </motion.button>
+                  </button>
                 </div>
               </div>
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-music"></i> {t('details.music')}</h3>
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2"><i className="uil uil-music-alt"></i><span>All Girls Are The Same</span></div>
-                  <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={handleMusicToggle} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
+                  <button onClick={handleMusicToggle} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">
                     {isMusicPlaying ? <><i className="uil uil-pause mr-2"></i> {t('details.stop_music')}</> : <><i className="uil uil-play mr-2"></i> {t('details.play_music')}</>}
-                  </motion.button>
+                  </button>
                 </div>
               </div>
               <div className="bg-gray-100 p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><i className="uil uil-qrcode-scan"></i> {t('details.share')}</h3>
                 <div className="flex flex-col items-start gap-2">
                   <span className="text-gray-600 text-sm">{t('details.share_description')}</span>
-                   <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} transition={springTransition} onClick={() => setIsQrModalOpen(true)} className="px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg">
+                  <button onClick={() => setIsQrModalOpen(true)} className="btn-interactive px-4 py-1 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-lg transform hover:scale-105 hover:shadow-2xl transition duration-300">
                     <i className="uil uil-qrcode-scan mr-2"></i>{t('details.show_qr')}
-                  </motion.button>
+                  </button>
                 </div>
               </div>
             </div>
@@ -293,22 +267,9 @@ export default function Home() {
         <section id="portfolio" className="py-20">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6 text-center">{t('portfolio.title')}</h2>
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              variants={gridContainerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {portfolioData.map((item) => (
-                <motion.div 
-                  key={item.id}
-                  variants={gridItemVariants}
-                  whileHover={{ scale: 1.07, y: -8 }}
-                  transition={springTransition}
-                  onClick={() => setSelectedItem(item)} 
-                  className="bg-white p-6 rounded-lg shadow-md portfolio-card"
-                >
+                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up">
                   <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
@@ -317,40 +278,27 @@ export default function Home() {
                        <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         <section id="certificate" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold mb-6">{t('certificate.title')}</h2>
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              variants={gridContainerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {certificateData.map((item) => (
-                <motion.div 
-                  key={item.id} 
-                  variants={gridItemVariants}
-                  whileHover={{ scale: 1.07, y: -8 }}
-                  transition={springTransition}
-                  onClick={() => setSelectedItem(item)} 
-                  className="bg-white p-6 rounded-lg shadow-md portfolio-card"
-                >
+                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in">
                   <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
                   <div className="mt-2">
                     <span className="inline-block bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded-full"><i className="uil uil-award"></i> {item.tags[0]}</span>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
         
@@ -389,16 +337,9 @@ export default function Home() {
               <div className="w-full mb-4">
                 <textarea value={whatsappMessage} onChange={(e) => setWhatsappMessage(e.target.value)} id="whatsapp-message" placeholder={t('contact.placeholder')} className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 border border-transparent focus:outline-none focus:border-transparent focus:ring-0 input-interactive" rows="4"></textarea>
               </div>
-              <motion.a 
-                href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} 
-                target="_blank" rel="noopener noreferrer" 
-                className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                transition={springTransition}
-              >
+              <a href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
                 <i className="uil uil-whatsapp mr-2"></i>{t('contact.send')}
-              </motion.a>
+              </a>
             </div>
           </div>
         </section>
@@ -424,8 +365,8 @@ export default function Home() {
               <div className="md:col-span-4 lg:col-span-3">
                 <h3 className="text-lg font-bold mb-4">{t('footer.find_me')}</h3>
                 <div className="flex space-x-4 justify-center md:justify-start">
-                    <motion.a href="https://instagram.com/shunsinee.x" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-pink-500 transition-colors" whileHover={{ scale: 1.2, y: -2 }} transition={springTransition}><i className="uil uil-instagram"></i></motion.a>
-                    <motion.a href="https://t.me/Nephyyy1" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-blue-500 transition-colors" whileHover={{ scale: 1.2, y: -2 }} transition={springTransition}><i className="uil uil-telegram"></i></motion.a>
+                    <a href="https://instagram.com/shunsinee.x" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-pink-500 transition-colors"><i className="uil uil-instagram"></i></a>
+                    <a href="https://t.me/Nephyyy1" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-500 hover:text-blue-500 transition-colors"><i className="uil uil-telegram"></i></a>
                 </div>
               </div>
               <div className="md:col-span-4 lg:col-span-3">
@@ -440,17 +381,9 @@ export default function Home() {
           </div>
         </footer>
         
-        <motion.a 
-          href="https://trakteer.id/nephyy1/tip" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="fixed bottom-4 right-4 z-30"
-          whileHover={{ scale: 1.1, rotate: 10 }}
-          whileTap={{ scale: 0.9 }}
-          transition={springTransition}
-        >
-          <Image src="/matcha.gif" alt="Tip" width={64} height={64} className="w-16 h-16 rounded-full shadow-lg" />
-        </motion.a>
+        <a href="https://trakteer.id/nephyy1/tip" target="_blank" rel="noopener noreferrer" className="fixed bottom-4 right-4 z-30">
+          <Image src="/matcha.gif" alt="Tip" width={64} height={64} className="w-16 h-16 rounded-full shadow-lg transform transition active:scale-90 hover:scale-105" />
+        </a>
       </div>
 
       {selectedItem && (
@@ -458,44 +391,32 @@ export default function Home() {
           className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" 
           onClick={() => setSelectedItem(null)}
         >
-          <motion.div 
-            className="bg-white rounded-lg shadow-2xl max-w-lg w-full p-6 relative"
+          <div 
+            className="bg-white rounded-lg shadow-2xl max-w-lg w-full p-6 relative modal-content"
             onClick={(e) => e.stopPropagation()}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
-            <motion.button 
+            <button 
               onClick={() => setSelectedItem(null)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl"
               aria-label={t('modal.close_label')}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
             >
               <i className="uil uil-times"></i>
-            </motion.button>
+            </button>
             <Image src={selectedItem.image} alt={selectedItem.title} width={600} height={400} className="w-full rounded-md mb-4" />
             <h3 className="text-3xl font-bold mb-3">{selectedItem.title}</h3>
             <p className="text-gray-700 mb-4">{selectedItem.longDescription}</p>
             
             {selectedItem.repoLink && (
               <div className="mt-6 flex justify-center">
-                <motion.a 
-                  href={selectedItem.repoLink} 
-                  target="_blank" rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={springTransition}
-                >
+                <a href={selectedItem.repoLink} target="_blank" rel="noopener noreferrer">
                   <button className={`${modalButtonClasses} bg-gradient-to-r from-gray-700 to-gray-900`}>
                     <i className="uil uil-github mr-2"></i>
                     {t('modal.github_code')}
                   </button>
-                </motion.a>
+                </a>
               </div>
             )}
-          </motion.div>
+          </div>
         </div>
       )}
 
@@ -504,30 +425,24 @@ export default function Home() {
           className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" 
           onClick={() => setIsQrModalOpen(false)}
         >
-          <motion.div 
-            className="bg-white rounded-lg shadow-2xl max-w-xs w-full p-6 relative text-center"
+          <div 
+            className="bg-white rounded-lg shadow-2xl max-w-xs w-full p-6 relative modal-content text-center"
             onClick={(e) => e.stopPropagation()}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
-            <motion.button 
+            <button 
               onClick={() => setIsQrModalOpen(false)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 text-2xl"
               aria-label={t('modal.close_label')}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
             >
               <i className="uil uil-times"></i>
-            </motion.button>
+            </button>
             <h3 className="text-2xl font-bold mb-4">{t('modal.share_title')}</h3>
             <Image src="/qr-code.png" alt="QR Code untuk Website" width={256} height={256} className="mx-auto qr-code-image" />
             <p className="mt-4 text-gray-600 text-sm">{t('modal.share_scan')}</p>
             <p className="mt-2 font-semibold text-blue-600">nephyy.tech</p>
-          </motion.div>
+          </div>
         </div>
       )}
     </>
   );
-      }
+}
