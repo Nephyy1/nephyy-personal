@@ -13,6 +13,14 @@
     "next-pwa": "latest",
     "next-i18next": "latest",
     "react-i18next": "latest",
-    "i18next": "latest"
+    "i18next": "latest",
+    "framer-motion": "latest",
+    "aos": "latest",
+    "sweetalert2": "latest"
+  },
+  "devDependencies": {
+    "tailwindcss": "latest",
+    "postcss": "latest",
+    "autoprefixer": "latest"
   }
 }
