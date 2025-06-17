@@ -120,6 +120,38 @@ export default function Home() {
     hidden: { opacity: 0, x: 50 },
     show: { opacity: 1, x: 0 }
   };
+  
+  const cardRevealVariant = {
+    hidden: { },
+    visible: {
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+  };
+
+  const imageRevealVariant = {
+      hidden: { scale: 1.1, opacity: 0 },
+      visible: {
+        scale: 1,
+        opacity: 1,
+        transition: {
+            duration: 0.8,
+            ease: [0.6, 0.01, -0.05, 0.95]
+        }
+    }
+  };
+
+  const overlayRevealVariant = {
+    hidden: { scaleX: 1 },
+    visible: {
+        scaleX: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1]
+        }
+    }
+  };
 
   return (
     <>
@@ -147,8 +179,7 @@ export default function Home() {
         <style>{`
           html, body { scroll-behavior: smooth; overflow-x: hidden; }
           body { font-family: 'Montserrat', sans-serif; }
-          .portfolio-card { perspective: 1000px; transition: transform 0.5s, box-shadow 0.5s; cursor: pointer; }
-          .portfolio-card:hover { transform: scale(1.05) rotateY(6deg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+          .portfolio-card:hover .portfolio-card-image { transform: scale(1.05); }
           @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
           @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
           .animate-in { animation: fadeIn 0.3s ease-out forwards; }
@@ -157,8 +188,6 @@ export default function Home() {
           @keyframes fillBar { from { width: 0; } to { width: var(--target-width); } }
           .btn-interactive { transition: transform 0.3s, box-shadow 0.3s; }
           .btn-interactive:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-          .input-interactive { transition: border-color 0.3s; }
-          .input-interactive:focus { border-color: #34D399; }
           @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
           .animate-slide { animation: fadeIn 0.5s ease-out, slide 3s linear infinite; }
           .modal-content { animation: fadeIn 0.3s ease-out; }
@@ -339,17 +368,35 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6 text-center">{t('portfolio.title')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {portfolioData.map((item) => (
-                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up">
-                  <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
-                  <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
-                  <p>{item.shortDescription}</p>
-                  <div className="mt-4">
-                    {item.tags.map(tag => (
-                        <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
+              {portfolioData.map((item, index) => (
+                 <motion.div 
+                    key={item.id} 
+                    className="bg-white rounded-lg shadow-md cursor-pointer portfolio-card overflow-hidden" 
+                    onClick={() => setSelectedItem(item)}
+                    variants={cardRevealVariant}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                 >
+                    <div className="relative w-full h-56">
+                        <motion.div variants={imageRevealVariant} className="w-full h-full">
+                           <Image src={item.image} alt={item.title} layout="fill" objectFit="cover" className="portfolio-card-image transition-transform duration-500" />
+                        </motion.div>
+                        <motion.div 
+                            className="absolute inset-0 bg-blue-200 origin-left"
+                            variants={overlayRevealVariant}
+                        />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
+                      <p className="text-gray-600">{item.shortDescription}</p>
+                      <div className="mt-4">
+                        {item.tags.map(tag => (
+                            <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -360,14 +407,32 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-6">{t('certificate.title')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {certificateData.map((item) => (
-                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in">
-                  <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
-                  <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
-                  <p>{item.shortDescription}</p>
-                  <div className="mt-2">
-                    <span className="inline-block bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded-full"><i className="uil uil-award"></i> {item.tags[0]}</span>
-                  </div>
-                </div>
+                <motion.div 
+                    key={item.id} 
+                    className="bg-white rounded-lg shadow-md cursor-pointer portfolio-card overflow-hidden" 
+                    onClick={() => setSelectedItem(item)}
+                    variants={cardRevealVariant}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                >
+                    <div className="relative w-full h-56">
+                        <motion.div variants={imageRevealVariant} className="w-full h-full">
+                            <Image src={item.image} alt={item.title} layout="fill" objectFit="cover" className="portfolio-card-image transition-transform duration-500" />
+                        </motion.div>
+                        <motion.div 
+                            className="absolute inset-0 bg-purple-200 origin-right"
+                            variants={overlayRevealVariant}
+                        />
+                    </div>
+                    <div className="p-6">
+                        <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
+                        <p className="text-gray-600">{item.shortDescription}</p>
+                        <div className="mt-2">
+                            <span className="inline-block bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded-full"><i className="uil uil-award"></i> {item.tags[0]}</span>
+                        </div>
+                    </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -403,10 +468,23 @@ export default function Home() {
 
         <section id="contact" className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-4xl font-bold mb-6 text-center">{t('contact.title')}</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center">{t('contact.title')}</h2>
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-              <div className="w-full mb-4">
-                <textarea value={whatsappMessage} onChange={(e) => setWhatsappMessage(e.target.value)} id="whatsapp-message" placeholder={t('contact.placeholder')} className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 border border-transparent focus:outline-none focus:border-transparent focus:ring-0 input-interactive" rows="4"></textarea>
+              <div className="relative w-full mb-4">
+                <textarea 
+                  id="whatsapp-message" 
+                  value={whatsappMessage} 
+                  onChange={(e) => setWhatsappMessage(e.target.value)} 
+                  className="block px-3 pb-2.5 pt-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+                  placeholder=" " 
+                  rows="4">
+                </textarea>
+                <label 
+                  htmlFor="whatsapp-message" 
+                  className="absolute text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-50 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-3"
+                >
+                  {t('contact.placeholder')}
+                </label>
               </div>
               <a href={`https://wa.me/79992461528?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="btn-interactive px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full transition duration-300 flex items-center">
                 <i className="uil uil-whatsapp mr-2"></i>{t('contact.send')}
