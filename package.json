@@ -13,7 +13,6 @@
     "next-pwa": "latest",
     "next-i18next": "latest",
     "react-i18next": "latest",
-    "i18next": "latest",
-    "react-scroll-parallax": "latest"
+    "i18next": "latest"
   }
 }
