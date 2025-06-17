@@ -174,8 +174,8 @@ export default function Home() {
           </div>
         </nav>
         
-        <section id="home" className="min-h-screen flex items-center justify-center pt-20" data-aos="fade-up">
-          <div className="text-center px-4">
+        <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" data-aos="fade-up">
+          <div className="text-center px-4 relative z-20">
             <h1 className="text-5xl font-extrabold mb-4">{t('home.welcome')}</h1>
             <p className="text-xl mb-8">{t('home.subtitle')}</p>
             <a href="https://store.nephyy.biz.id">
@@ -184,30 +184,28 @@ export default function Home() {
               </button>
             </a>
           </div>
-        </section>
 
-        <section id="parallax-clouds" className="relative h-64 w-full overflow-hidden" style={{ backgroundColor: '#87CEEB' }}>
           <div
-              className="absolute w-full h-full -bottom-20 z-10"
+              className="absolute w-full h-1/2 -bottom-1/4 left-0 z-10"
               style={{ transform: `translateY(${offsetY * 0.2}px)` }}
           >
               <Image src="/white cloud.webp" layout="fill" objectFit="cover" alt="cloud layer" />
           </div>
           <div
-              className="absolute w-48 h-48 top-5 left-10 z-20"
+              className="absolute w-48 h-48 bottom-20 left-10 z-10"
               style={{ transform: `translateY(${offsetY * 0.45}px)` }}
           >
               <Image src="/cloud 1.webp" layout="fill" objectFit="contain" alt="cloud 1" />
           </div>
           <div
-              className="absolute w-64 h-64 top-10 right-10 z-20"
+              className="absolute w-64 h-64 bottom-10 right-10 z-10"
               style={{ transform: `translateY(${offsetY * 0.3}px)` }}
           >
               <Image src="/cloud 2.webp" layout="fill" objectFit="contain" alt="cloud 2" />
           </div>
         </section>
 
-        <section id="about" className="py-20 bg-white relative overflow-hidden">
+        <section id="about" className="py-20 bg-white relative overflow-hidden z-20">
           <Image src="/nyan-cat.gif" alt="Nyan Cat Animation" width={200} height={100} style={{ top: "-12px" }} className="absolute left-0 opacity-50 animate-slide" />
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
             <div 
