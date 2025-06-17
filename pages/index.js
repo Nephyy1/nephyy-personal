@@ -175,7 +175,7 @@ export default function Home() {
         </nav>
         
         <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" data-aos="fade-up">
-          <div className="text-center px-4 relative z-20">
+          <div className="text-center px-4 relative z-30">
             <h1 className="text-5xl font-extrabold mb-4">{t('home.welcome')}</h1>
             <p className="text-xl mb-8">{t('home.subtitle')}</p>
             <a href="https://store.nephyy.biz.id">
@@ -186,22 +186,32 @@ export default function Home() {
           </div>
 
           <div
-              className="absolute w-full h-1/2 -bottom-1/4 left-0 z-10"
+              className="absolute w-full h-1/3 md:h-2/5 -bottom-1/4 left-0 z-10"
               style={{ transform: `translateY(${offsetY * 0.2}px)` }}
           >
               <Image src="/white cloud.webp" layout="fill" objectFit="cover" alt="cloud layer" />
           </div>
           <div
-              className="absolute w-48 h-48 bottom-20 left-10 z-10"
+              className="absolute w-32 h-32 bottom-5 left-5 md:w-48 md:h-48 md:bottom-16 md:left-10 z-10"
               style={{ transform: `translateY(${offsetY * 0.45}px)` }}
           >
               <Image src="/cloud 1.webp" layout="fill" objectFit="contain" alt="cloud 1" />
           </div>
           <div
-              className="absolute w-64 h-64 bottom-10 right-10 z-10"
+              className="absolute w-40 h-40 bottom-2 -right-5 md:w-64 md:h-64 md:bottom-10 md:right-10 z-10"
               style={{ transform: `translateY(${offsetY * 0.3}px)` }}
           >
               <Image src="/cloud 2.webp" layout="fill" objectFit="contain" alt="cloud 2" />
+          </div>
+
+          <div
+              className="absolute w-32 h-48 md:w-48 md:h-72 top-1/2 left-1/2 z-20"
+              style={{
+                transform: `translate(-50%, calc(-50% + ${offsetY * 0.1}px)) rotate(${offsetY * 0.05}deg)`,
+                opacity: Math.max(0, 1 - offsetY / 500),
+              }}
+          >
+              <Image src="/new astro.webp" layout="fill" objectFit="contain" alt="Astronaut" />
           </div>
         </section>
 
