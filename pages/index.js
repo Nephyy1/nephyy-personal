@@ -14,6 +14,29 @@ export async function getStaticProps({ locale }) {
   };
 }
 
+const useTypingEffect = (textToType, interKeyStrokeDurationInMs) => {
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setCurrentText('');
+    setCurrentIndex(0);
+  }, [textToType]);
+
+  useEffect(() => {
+    if (currentIndex < textToType.length) {
+      const timeout = setTimeout(() => {
+        setCurrentText(prevText => prevText + textToType[currentIndex]);
+        setCurrentIndex(prevIndex => prevIndex + 1);
+      }, interKeyStrokeDurationInMs);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, textToType, interKeyStrokeDurationInMs]);
+
+  return currentText;
+};
+
 export default function Home() {
   const { t } = useTranslation('common');
 
@@ -25,6 +48,9 @@ export default function Home() {
 
   const timelineItems = t('timeline.items', { returnObjects: true });
   const timelineData = Array.isArray(timelineItems) ? timelineItems : [];
+  
+  const aboutText = t('about.description');
+  const typedAboutText = useTypingEffect(aboutText, 50);
 
   const tagColorMap = {
     Web: "bg-blue-200 text-blue-800",
@@ -132,6 +158,17 @@ export default function Home() {
           .modal-content { animation: fadeIn 0.3s ease-out; }
           .qr-code-image { transition: transform 0.3s ease-in-out; }
           .qr-code-image:hover { transform: scale(1.05); }
+          .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.5rem;
+            background-color: #1f2937;
+            animation: blink 1s step-end infinite;
+          }
+          @keyframes blink {
+            from, to { background-color: transparent }
+            50% { background-color: #1f2937; }
+          }
         `}</style>
       </Head>
 
@@ -205,8 +242,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="py-20 bg-white relative overflow-hidden z-20">
-          <Image src="/nyan-cat.gif" alt="Nyan Cat Animation" width={200} height={100} style={{ top: "-12px" }} className="absolute left-0 opacity-50 animate-slide" />
+        <section id="about" className="py-20 bg-white relative overflow-hidden">
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
             <div 
               className="relative inline-block mb-8 group" 
@@ -231,7 +267,10 @@ export default function Home() {
               </button>
             </div>
             <h2 className="text-4xl font-bold mb-6">{t('about.title')}</h2>
-            <p className="text-lg leading-relaxed mb-16">{t('about.description')}</p>
+            <p className="text-lg leading-relaxed mb-16 min-h-[112px] md:min-h-[84px]">
+              {typedAboutText}
+              <span className="typing-cursor"></span>
+            </p>
 
             <div className="container mx-auto px-4 py-8">
               <h3 className="text-3xl font-bold text-center mb-12">{t('timeline.title')}</h3>
