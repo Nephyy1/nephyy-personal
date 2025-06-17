@@ -335,18 +335,12 @@ export default function Home() {
           </div>
         </section>
         
-        <section id="portfolio" className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 -z-10">
-                <span className="absolute top-[10%] left-[5%] text-7xl text-blue-200/50" style={{ transform: `translateY(${offsetY * 0.1}px)` }}>{`{ }`}</span>
-                <span className="absolute top-[20%] right-[10%] text-5xl text-purple-200/50" style={{ transform: `translateY(${offsetY * 0.05}px)` }}>&lt;/&gt;</span>
-                <span className="absolute bottom-[25%] left-[15%] text-4xl text-blue-200/50" style={{ transform: `translateY(${offsetY * 0.15}px)` }}>[ ]</span>
-                <span className="absolute bottom-[10%] right-[5%] text-8xl text-purple-200/50" style={{ transform: `translateY(${offsetY * 0.08}px)` }}>{`{ }`}</span>
-          </div>
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <section id="portfolio" className="py-20">
+          <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6 text-center">{t('portfolio.title')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {portfolioData.map((item) => (
-                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up" role="button" tabIndex="0">
+                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="fade-up">
                   <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
@@ -361,18 +355,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="certificate" className="py-20 bg-white relative overflow-hidden">
-            <div className="absolute inset-0 -z-10">
-                <span className="absolute top-[15%] left-[10%] text-8xl opacity-10" style={{ transform: `translateY(${offsetY * 0.1}px) rotate(-15deg)` }}>🏅</span>
-                <span className="absolute top-[50%] right-[15%] text-9xl opacity-10" style={{ transform: `translateY(${offsetY * 0.15}px) rotate(10deg)` }}>📜</span>
-                <span className="absolute bottom-[5%] left-[20%] text-7xl opacity-10" style={{ transform: `translateY(${offsetY * 0.05}px) rotate(5deg)` }}>🏆</span>
-                <span className="absolute bottom-[20%] right-[5%] text-6xl opacity-10" style={{ transform: `translateY(${offsetY * 0.2}px) rotate(-5deg)` }}>🎖️</span>
-            </div>
-          <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
+        <section id="certificate" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold mb-6">{t('certificate.title')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {certificateData.map((item) => (
-                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in" role="button" tabIndex="0">
+                <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-lg shadow-md portfolio-card" data-aos="zoom-in">
                   <Image src={item.image} alt={item.title} width={500} height={300} className="w-full rounded-md mb-4" />
                   <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
                   <p>{item.shortDescription}</p>
