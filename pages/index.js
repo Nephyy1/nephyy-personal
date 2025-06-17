@@ -169,7 +169,14 @@ export default function Home() {
 
       <ScrollProgressBar />
 
-      <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
+      <div className="relative bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900">
+        <div 
+            className="absolute inset-0 z-0" 
+            style={{
+                backgroundImage: 'radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px)',
+                backgroundSize: '20px 20px'
+            }}
+        ></div>
         <audio id="fav-music" src="/music.mp3" loop ref={audioRef}></audio>
         <nav className="fixed w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm">
           <div className="max-w-7xl mx-auto px-4">
@@ -335,7 +342,7 @@ export default function Home() {
           </div>
         </section>
         
-        <section id="portfolio" className="py-20">
+        <section id="portfolio" className="py-20 relative z-10">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6 text-center">{t('portfolio.title')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -355,7 +362,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="certificate" className="py-20 bg-white">
+        <section id="certificate" className="py-20 bg-white relative z-10">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold mb-6">{t('certificate.title')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -409,7 +416,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className="py-20 bg-white">
+        <section id="contact" className="py-20 bg-white relative z-10">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-4xl font-bold mb-6 text-center">{t('contact.title')}</h2>
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
@@ -423,7 +430,7 @@ export default function Home() {
           </div>
         </section>
         
-        <footer className="bg-white text-gray-800 pt-16 pb-8 px-4">
+        <footer className="bg-white text-gray-800 pt-16 pb-8 px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 text-center md:text-left">
               <div className="md:col-span-12 lg:col-span-4 mb-6 md:mb-0">
