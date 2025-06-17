@@ -14,6 +14,6 @@
     "next-i18next": "latest",
     "react-i18next": "latest",
     "i18next": "latest",
-    "framer-motion": "latest"
+    "react-scroll-parallax": "latest"
   }
 }
