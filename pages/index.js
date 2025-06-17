@@ -5,6 +5,7 @@ import ScrollProgressBar from "../components/ScrollProgressBar";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { motion, useScroll, useSpring } from "framer-motion";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -13,29 +14,6 @@ export async function getStaticProps({ locale }) {
     },
   };
 }
-
-const useTypingEffect = (textToType, interKeyStrokeDurationInMs) => {
-  const [currentText, setCurrentText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    setCurrentText('');
-    setCurrentIndex(0);
-  }, [textToType]);
-
-  useEffect(() => {
-    if (currentIndex < textToType.length) {
-      const timeout = setTimeout(() => {
-        setCurrentText(prevText => prevText + textToType[currentIndex]);
-        setCurrentIndex(prevIndex => prevIndex + 1);
-      }, interKeyStrokeDurationInMs);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, textToType, interKeyStrokeDurationInMs]);
-
-  return currentText;
-};
 
 export default function Home() {
   const { t } = useTranslation('common');
@@ -48,9 +26,6 @@ export default function Home() {
 
   const timelineItems = t('timeline.items', { returnObjects: true });
   const timelineData = Array.isArray(timelineItems) ? timelineItems : [];
-  
-  const aboutText = t('about.description');
-  const typedAboutText = useTypingEffect(aboutText, 50);
 
   const tagColorMap = {
     Web: "bg-blue-200 text-blue-800",
@@ -67,6 +42,18 @@ export default function Home() {
   const [profileImage, setProfileImage] = useState('/nephyy2.gif');
   const [offsetY, setOffsetY] = useState(0);
   const audioRef = useRef(null);
+  const timelineRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start end", "end start"]
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   const handleScroll = () => setOffsetY(window.pageYOffset);
 
@@ -114,6 +101,25 @@ export default function Home() {
   };
 
   const modalButtonClasses = "w-full px-5 py-2.5 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center";
+  
+  const timelineContainerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.3,
+      }
+    }
+  };
+
+  const timelineItemVariants = {
+    hidden: { opacity: 0, x: -50 },
+    show: { opacity: 1, x: 0 }
+  };
+  
+  const timelineItemVariantsRight = {
+    hidden: { opacity: 0, x: 50 },
+    show: { opacity: 1, x: 0 }
+  };
 
   return (
     <>
@@ -158,17 +164,6 @@ export default function Home() {
           .modal-content { animation: fadeIn 0.3s ease-out; }
           .qr-code-image { transition: transform 0.3s ease-in-out; }
           .qr-code-image:hover { transform: scale(1.05); }
-          .typing-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.5rem;
-            background-color: #1f2937;
-            animation: blink 1s step-end infinite;
-          }
-          @keyframes blink {
-            from, to { background-color: transparent }
-            50% { background-color: #1f2937; }
-          }
         `}</style>
       </Head>
 
@@ -190,7 +185,7 @@ export default function Home() {
                 <LanguageSwitcher />
               </div>
               <div className="md:hidden flex items-center space-x-4">
-                   <LanguageSwitcher />
+                  <LanguageSwitcher />
                 <button id="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl focus:outline-none" aria-label="Toggle Menu">
                   {isMenuOpen ? <i className="uil uil-times"></i> : <i className="uil uil-bars"></i>}
                 </button>
@@ -267,31 +262,41 @@ export default function Home() {
               </button>
             </div>
             <h2 className="text-4xl font-bold mb-6">{t('about.title')}</h2>
-            <p className="text-lg leading-relaxed mb-16 min-h-[112px] md:min-h-[84px]">
-              {typedAboutText}
-              <span className="typing-cursor"></span>
-            </p>
+            <p className="text-lg leading-relaxed mb-16">{t('about.description')}</p>
 
             <div className="container mx-auto px-4 py-8">
               <h3 className="text-3xl font-bold text-center mb-12">{t('timeline.title')}</h3>
-              <div className="relative">
-                <div className="absolute top-0 h-full w-0.5 bg-gray-200 left-4 md:left-1/2 md:-translate-x-1/2"></div>
+              <motion.div 
+                ref={timelineRef} 
+                className="relative"
+                variants={timelineContainerVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="absolute top-0 w-0.5 bg-blue-300 left-4 md:left-1/2 md:-translate-x-1/2"
+                  style={{ scaleY, originY: 0, height: '100%' }}
+                />
                 {timelineData.map((item, index) => (
-                  <div key={index} className="relative mb-8">
-                    <div className="absolute left-4 top-1 md:left-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white -translate-x-1/2">
+                  <motion.div 
+                    key={index} 
+                    className="relative mb-8"
+                    variants={index % 2 === 0 ? timelineItemVariants : timelineItemVariantsRight}
+                  >
+                    <div className="absolute left-4 top-1 md:left-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white -translate-x-1/2 z-10">
                       <i className={`${item.icon} text-lg`}></i>
                     </div>
                     <div 
                       className={`p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-lg ml-12 md:ml-0 md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'}`}
-                      data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
                     >
                       <p className="text-sm font-semibold text-blue-600">{item.year}</p>
                       <h4 className="font-bold text-gray-800 text-lg mb-1">{item.title}</h4>
                       <p className="text-sm leading-snug tracking-wide text-gray-600">{item.description}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
@@ -341,7 +346,7 @@ export default function Home() {
                   <p>{item.shortDescription}</p>
                   <div className="mt-4">
                     {item.tags.map(tag => (
-                       <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
+                        <span key={tag} className={`inline-block text-xs px-2 py-1 rounded-full mr-2 ${tagColorMap[tag] || 'bg-gray-200 text-gray-800'}`}>{tag}</span>
                     ))}
                   </div>
                 </div>
